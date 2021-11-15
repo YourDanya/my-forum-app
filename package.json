@@ -5,8 +5,10 @@
   "main": "app.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "nodemon server.js",
-    "dev": "nodemon server.js",
+    "start": "node app.js",
+    "server": "nodemon server.js",
+    "client": "npm run start --prefix client",
+    "dev": "concurrently \"npm run server \" \"npm run client\"",
     "start:prod": "SET NODE_ENV=production & nodemon server.js",
     "debug": "ndb server.js",
     "watch:js": "parcel watch ./public/js/index.js --out-dir ./public/js --out-file bundle.js",
@@ -20,6 +22,7 @@
     "axios": "^0.21.1",
     "bcryptjs": "^2.4.3",
     "compression": "^1.7.4",
+    "concurrently": "^6.4.0",
     "cookie-parser": "^1.4.5",
     "dotenv": "^10.0.0",
     "express": "^4.17.1",
@@ -43,5 +46,8 @@
     "stripe": "^7.0.0",
     "validator": "^13.6.0",
     "xss-clean": "^0.1.1"
+  },
+  "devDependencies": {
+    "cross-env": "^7.0.3"
   }
 }
