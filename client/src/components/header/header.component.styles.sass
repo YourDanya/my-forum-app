@@ -14,12 +14,35 @@ $small: 500px
   border-radius: 10px
   border: 1px solid rgb(212, 228, 247)
   .logo
-    width: 10%
+    width: 9%
   .forum-name
     width: 40%
     padding-left: 2%
     font-family: 'AnotherDangerFont', sans-serif
     font-size: 4.5vw
+  .sign-in-up
+    width: 20%
+    display: flex
+    flex-direction: column
+    align-items: center
+    .sign-container
+      margin: 1%
+      height: 30px
+      width: 110px
+      border-radius: 100px
+      display: flex
+      justify-content: center
+      align-items: center
+      cursor: pointer
+      font-weight: 900
+      font-size: 16px
+    .sign-in
+      background-color: rgb(156,0,104)
+      color: white
+    .sign-up
+      border: 2px solid rgb(156,0,104)
+      color: rgb(156,0,104)
+
   .entered-user
     display: flex
     align-items: center
@@ -52,19 +75,24 @@ $small: 500px
     display: flex
     flex-wrap: wrap
     .logo
-      width: 100px
+      width: 90px
     .forum-name
-      width: 70%
+      display: flex
+      justify-content: center
+      padding-left: 0
+      width: calc(100% - 90px)
       font-size: 55px
     .entered-user
       margin-bottom: 5px
-      margin-left: 10px
+      margin-left: 2%
       width: 50%
+    .sign-in-up
+      width: 48%
 
 @media screen and (max-width: $small)
   .header
     .logo
-      width: 90px
+      width: 80px
     .forum-name
-      width: 70%
+      width: calc(100% - 80px)
       font-size: 45px
