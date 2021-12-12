@@ -16,8 +16,11 @@ const path= require('path')
 const cookieParser= require('cookie-parser')
 app.set('view engine', 'pug');
 app.set('views', path.join(__dirname, 'views'));
+const cors=require('cors')
 
 //1) middleware
+
+app.use(cors())
 
 app.use(express.static(path.join(__dirname, 'public')));
 

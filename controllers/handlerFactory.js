@@ -91,15 +91,12 @@ exports.getOne= (Model, popOptions) => catchAsync( async (req, res, next) =>{
 exports.getAll= Model => catchAsync( async (req, res, next) =>{
 
   // to allow for nested get eviews on tour
-  let filter= {}
-  if(req.params.tourId) filter ={tour: req.params.tourId}
+  // let filter= {}
+  // if(req.params.tourId) filter ={tour: req.params.tourId}
 
-  const features= new APIFeatures(Model.find(filter), req.query)
-    .filter()
-    .sort()
-    .limitFields()
-    .paginate();
-  const doc= await features.query;
+  const doc= await Model.find().sort({id:-1});
+
+  // if(Model===Thread) doc.sort()
 
   res.status(200).json({
     status:'success',

@@ -1,7 +1,7 @@
-
   const dotenv= require('dotenv');
   const app=require('./app');
   const mongoose=require('mongoose');
+
 
   process.on('uncaughtException', err=>{
     console.log('unhandled exception! shutting down...');
@@ -24,8 +24,8 @@
 
   const port= process.env.PORT|| 3000
 
-const server= app.listen(port, ()=>{
-})
+  const server= app.listen(port, ()=>{
+  })
 
   process.on('unhandledRejection', err =>{
     console.log('unhandled rejection! shutting down...');
@@ -34,6 +34,5 @@ const server= app.listen(port, ()=>{
       process.exit(1);
     })
   })
-
 
 //test

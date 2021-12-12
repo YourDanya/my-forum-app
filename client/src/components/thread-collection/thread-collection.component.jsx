@@ -1,11 +1,16 @@
-import React from './thread-collection.styles.sass'
+import React from 'react'
 import './thread-collection.styles.sass'
+import ThreadOverview from "../thread-overview/thread-overview.component";
+import {useState} from "react";
+import Pagination from "../pagination/pagination.component";
 
-const ThreadCollection= ()=>{
-    return <div>
-        <div>thread 1</div>
-        <div>thread 2</div>
-        <div>thread 3</div>
+const ThreadCollection= ({threads, ...otherProps})=>{
+
+    return <div className={'threads'}>
+        {
+            threads.map((thread, idx) => <ThreadOverview key={idx} thread={thread}/>)
+        }
+        <Pagination {...otherProps}/>
     </div>
 }
 
