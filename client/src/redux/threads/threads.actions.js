@@ -1,7 +1,8 @@
 import threadTypes from "./threads.types";
 
-export const fetchThreadsStart= ()=>({
-    type: threadTypes.FETCH_THREADS_START
+export const fetchThreadsStart= (threadId)=>({
+    type: threadTypes.FETCH_THREADS_START,
+    payload: threadId
 })
 
 export const fetchThreadsSuccess= threads =>({

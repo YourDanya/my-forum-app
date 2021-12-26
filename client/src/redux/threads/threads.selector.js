@@ -9,5 +9,10 @@ export const selectThreads= createSelector(
 
 export const selectIsThreadFetching = createSelector(
     [selectThreadStore],
-    threadStore => threadStore.isFetching
+    threadStore => threadStore.isFetched
+)
+
+export const selectCurrentThread = createSelector(
+    [selectThreadStore],
+    threadStore => threadStore.currentThread
 )

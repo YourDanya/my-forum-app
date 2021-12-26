@@ -1,5 +1,5 @@
 import {combineReducers} from "redux";
-import {persistCombineReducers, persistReducer} from 'redux-persist'
+import {persistReducer} from 'redux-persist'
 import storage from 'redux-persist/lib/storage'
 import threadsReducer from "./threads/threads.reducer";
 

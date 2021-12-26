@@ -1,13 +1,12 @@
-import React, {useEffect, useRef, useState} from "react"
+import React, {useState} from "react"
 
 import './sign-up.styles.sass'
 import {
     AiFillEye,
     AiFillEyeInvisible,
     AiOutlineLock,
-    AiOutlineUnlock, BsClock,
-    BsFillShieldLockFill, BsPerson, BsShieldLock, GiConfirmed,
-    GoPerson,
+    BsPerson,
+    GiConfirmed,
     HiOutlineMail
 } from "react-icons/all";
 
@@ -16,7 +15,6 @@ const SignUp= ()=>{
     const [signInData, setSignInData]= useState({name:'', email:'', password:'', passwordConfirm: ''})
     const {name, email, password, passwordConfirm}= signInData
     const [eye, setEye]= useState({one: true, two: true})
-    const inputOne=useRef(null)
 
     const handleChange= event=>{
         const {value, name}= event.target

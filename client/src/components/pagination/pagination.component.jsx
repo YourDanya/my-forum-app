@@ -1,8 +1,7 @@
 import React from 'react'
 import './pagination.styles.sass'
-import isInt from "validator/es/lib/isInt";
 
-const Pagination= ({currentPage, setPage, pagesCount}) => {
+const Pagination= ({currentPage, setPage, pagesCount, styles}) => {
     if(pagesCount===1){
         return null
     }
@@ -68,7 +67,7 @@ const Pagination= ({currentPage, setPage, pagesCount}) => {
         }
     }
 
-    return <div className={'pagination'}>
+    return <div className={'pagination'} style={styles}>
         {
             arr.map((elem, idx) =>
                 <div key={idx} className={'elem '+setClass(elem)} onClick={()=>onClick(elem)}>{elem}</div>

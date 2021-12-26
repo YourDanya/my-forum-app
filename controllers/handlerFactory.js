@@ -54,11 +54,11 @@ exports.createOne = Model => exports.createTour= catchAsync(async (req, res, nex
 
 exports.getOne= (Model, popOptions) => catchAsync( async (req, res, next) =>{
 
-  let query= Model===Thread? await Thread.findOne({id: req.params.id}).populate('posts') : await Model.findById(req.params.id)
+  let doc= Model===Thread? await Thread.findOne({id: req.params.id}).populate('posts') : await Model.findById(req.params.id)
+  console.log(doc)
 
-
-  if(popOptions) query= query.populate(popOptions)
-  const doc= await query;
+  // if(popOptions) query= query.populate(popOptions)
+  // const doc= await query;
 
   if(!doc){
     return next(new AppError('no document found with that ID', 404));

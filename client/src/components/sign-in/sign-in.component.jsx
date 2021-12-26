@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from "react"
+import React, {useState} from "react"
 
 import './sign-in.styles.sass'
 import {AiFillEye, AiFillEyeInvisible, AiOutlineLock, HiOutlineMail} from "react-icons/all";

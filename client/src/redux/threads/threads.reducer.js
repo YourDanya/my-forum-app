@@ -2,6 +2,7 @@ import threadTypes from "./threads.types";
 
 const INITIAL_STATE= {
     threads: null,
+    currentThread: null,
     isFetching: false,
     errorMessage: undefined,
 }
@@ -14,10 +15,11 @@ const threadsReducer= (state= INITIAL_STATE, action) => {
                 isFetching: true
             }
         case threadTypes.FETCH_THREADS_SUCCESS:
+            const res= Array.isArray(action.payload)? 'threads' : 'currentThread'
             return{
                 ...state,
                 isFetching: false,
-                threads: action.payload
+                [res]: action.payload
             }
         case threadTypes.FETCH_THREADS_FAILURE:
             return{

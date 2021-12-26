@@ -16,8 +16,10 @@ const sharp= require('sharp')
 //   }
 // })
 
-
 exports.myThread= async(req, res, next)=>{
+
+  if(!req.user) return
+
   const user=await User.findOne({_id: req.user.id});
   const thread=await Thread.findOne({_id: req.body.thread});
   const myThread= user.myThreads.find(item => {return item.thread.toString()===req.body.thread.toString()})

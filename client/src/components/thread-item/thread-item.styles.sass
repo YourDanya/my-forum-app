@@ -1,0 +1,120 @@
+.main
+  position: relative
+  width: 70%
+  margin-bottom: 10px
+.item
+  width: 100%
+  position: relative
+  border-radius: 10px 10px 0 0
+  padding: 20px
+  min-height: 0
+  margin-bottom: 75px
+  .name
+    color: #be007f
+    font-size: 24px
+    font-weight: 700
+    line-height: 34px
+  .description
+    padding: 16px 0
+    font-size: 16px
+    line-height: 24px
+    font-weight: 400
+  .date
+    color: #7b92ad
+    font-size: 12px
+  .info
+    margin-top: 10px
+    .author
+      border-top: 1px solid rgb(212, 228, 247)
+      border-bottom: 1px solid rgb(212, 228, 247)
+      display: flex
+      align-items: center
+      img
+        height: 80px
+        margin-bottom: 5px
+        margin-right: 5px
+      &-name
+        color: #7b92ad
+        span
+          color: black
+          font-size: 18px
+          font-weight: 500
+    .stats
+      height: 60px
+      display: flex
+      align-items: center
+      border-bottom: 1px solid rgb(212, 228, 247)
+      .like
+        color: #7b92ad
+        margin-right: 20px
+        font-size: 20px
+        span
+          margin-left: 2px
+          font-size: 15px
+      .dislike
+        svg
+          transform: translateY(2px)
+    .reply
+      display: flex
+      margin-top: 20px
+      flex-wrap: wrap
+      align-items: flex-end
+      &-title
+        font-size: 12px
+        width: 100%
+      textarea
+        border-radius: 2px
+        margin-top: 10px
+        resize: none
+        border: 1px solid rgba(51,51,51,.18)
+        width: 100%
+        height: 120px
+        font-size: 16px
+        padding: 16px 20px
+        &::placeholder
+          color: rgb(194,194,194)
+        &:focus
+          font-size: 18px
+          outline: none !important
+          border-color: rgba(119,170,230,255)
+      &-button
+        color: #be007f
+        font-weight: 500
+        font-size: 18px
+        margin-top: 20px
+        margin-left: auto
+        margin-bottom: auto
+        cursor: pointer
+  .replies
+    padding: 25.5px 10px
+    border-radius: 0 0 10px 10px
+    background: linear-gradient(240deg,#44576e,#333)
+    width: calc(100% + 2px)
+    height: 100px
+    position: absolute
+    left: -1px
+    bottom: -100px
+    &-wrapper
+      width: 100%
+      display: flex
+      align-items: center
+      justify-content: space-between
+    &-count
+      font-size: 24px
+      color: rgba(255,255,255,.87)
+      font-weight: 700
+    &-last
+      color: rgba(255,255,255,.76)
+      font-size: 12px
+.posts
+  display: flex
+  flex-direction: column
+  align-items: center
+  &-pagination
+    margin: 0 auto
+    display: flex
+    position: relative
+    min-height: 0
+    height: 50px
+    width: 0
+    min-width: 200px

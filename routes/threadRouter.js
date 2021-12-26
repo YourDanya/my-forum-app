@@ -17,7 +17,10 @@ router
 
 router
     .route('/:id')
-    .get(authController.protect, threadController.getThread, userController.myThread)
+    .get(
+        // authController.protect,
+        threadController.getThread,
+        userController.myThread)
     .patch(
         authController.protect,
         authController.restrictTo('admin'),

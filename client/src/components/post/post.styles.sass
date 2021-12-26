@@ -1,0 +1,58 @@
+.post
+  min-height: 0
+  padding: 10px 15px 15px 15px
+  width: 97.5%
+  margin-top: 0
+  margin-bottom: 20px
+  &-author
+    border-bottom: 1px solid rgb(212, 228, 247)
+    display: flex
+    align-items: center
+    padding-bottom: 10px
+    img
+      display: block
+      height: 50px
+    .name
+        color: #7b92ad
+        margin-left: 20px
+        span
+          font-weight: 500
+          color: black
+  &-content
+    padding: 18px 0
+    border-bottom: 1px solid rgb(212, 228, 247)
+    .block
+      display: flex
+      justify-content: space-between
+      .date
+        color: #7b92ad
+        font-size: 12px
+      .number
+        color: #7b92ad
+        font-size: 12px
+    .text
+      line-height: 23px
+      margin-top: 10px
+  &-footer
+    margin-top: 15px
+    display: flex
+    justify-content: space-between
+    .stats
+      display: flex
+      .like
+        color: #7b92ad
+        margin-right: 20px
+        font-size: 19px
+        svg
+          cursor: pointer
+        span
+          margin-left: 2px
+          font-size: 14px
+      .dislike
+        svg
+          transform: translateY(3px)
+    .reply
+      margin-right: 10px
+      color: #be007f
+      font-weight: 500
+      cursor: pointer
