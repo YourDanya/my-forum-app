@@ -10,6 +10,7 @@ import MyReplies from "./components/my-replies/my-replies.component";
 import SignIn from "./components/sign-in/sign-in.component";
 import SignUp from "./components/sign-up/sign-up.component";
 import ThreadItemContainer from "./components/thread-item/thread-item.container";
+import Profile from "./components/profile/profile.component";
 
 function App() {
 
@@ -23,6 +24,7 @@ function App() {
                 <Route path={'/myReplies'} component={MyReplies}/>
                 <Route path={'/sign-in'} component={SignIn}/>
                 <Route path={'/sign-up'} component={SignUp}/>
+                <Route path={'/profile'} component={Profile}/>
             </Switch>
         </div>
         <Footer/>

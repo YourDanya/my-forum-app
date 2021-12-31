@@ -13,8 +13,8 @@ const Header= ({history})=>{
             <div className={'label'}>вы вошли как <br/> <span>анонимный пользователь №1</span></div>
         </div>
         <div className={'sign-in-up'}>
-            <div className={'sign-container sign-up'} onClick={()=>history.push('sign-up')}>Регистрация</div>
-            <div className={'sign-container sign-in'} onClick={()=>history.push('sign-in')}>Вход</div>
+            <div className={'sign-container sign-up'} onClick={()=>history.push('/sign-up')}>Регистрация</div>
+            <div className={'sign-container sign-in'} onClick={()=>history.push('/sign-in')}>Вход</div>
         </div>
     </div>
 }

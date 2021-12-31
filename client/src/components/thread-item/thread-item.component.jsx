@@ -8,9 +8,9 @@ import Post from "../post/post.component";
 import Pagination from "../pagination/pagination.component";
 import {pageCalc} from "../../utils/pages";
 
-const ThreadItem = ({name, description, createdAt, likes, dislikes, author, posts}) =>{
+const ThreadItem = ({name, description, createdAt, likes, dislikes, author, posts}) => {
 
-    const [currentPage, setPage]=useState(1)
+    const [currentPage, setPage] = useState(1)
 
     const {pagesCount, itemsOnPage} = pageCalc(posts, currentPage)
 
@@ -35,7 +35,7 @@ const ThreadItem = ({name, description, createdAt, likes, dislikes, author, post
             <div className={'info'}>
                 <div className={'author'}>
                     <img src={avatarPath} alt={'avatar'}/>
-                    <div className={'author-name'}> <span>Автор</span> <br/> {author.name}</div>
+                    <div className={'author-name'}><span>Автор</span> <br/> {author.name}</div>
                 </div>
 
                 <div className={'stats'}>
@@ -62,14 +62,14 @@ const ThreadItem = ({name, description, createdAt, likes, dislikes, author, post
                 </div>
             </div>
             {
-                posts.length>1 ?
+                posts.length > 1 ?
                     <div className={'replies'}>
                         <div className={'replies-wrapper'}>
                             <div className={'replies-count'}>
                                 ответов {posts.length}
                             </div>
                             <div className={'replies-last'}>
-                                Последний - {dateFormat(posts[posts.length-1].createdAt)}
+                                Последний - {dateFormat(posts[posts.length - 1].createdAt)}
                             </div>
                         </div>
                     </div> : null
@@ -80,14 +80,17 @@ const ThreadItem = ({name, description, createdAt, likes, dislikes, author, post
             {itemsOnPage.map((post, idx) => <Post {...post} key={idx}/>)}
         </div>
 
-        <div className={'threads posts-pagination'}>
-            <Pagination
-                pagesCount={pagesCount}
-                setPage={setPage}
-                currentPage={currentPage}
-                styles={{top: '50%', transform: 'translateY(-50%) translateX(-50%)'}}
-            />
-        </div>
+        {
+            pagesCount > 0 ?
+                <div className={'threads posts-pagination'}>
+                    <Pagination
+                        pagesCount={pagesCount}
+                        setPage={setPage}
+                        currentPage={currentPage}
+                        styles={{top: '50%', transform: 'translateY(-50%) translateX(-50%)'}}
+                    />
+                </div> : null
+        }
 
     </div>
 }

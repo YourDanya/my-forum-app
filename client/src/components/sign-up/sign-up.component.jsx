@@ -36,6 +36,7 @@ const SignUp= ()=>{
         if (elements.length>1) elements[1].style.color='rgb(129,129,129)'
     }
 
+
     return <div className={'sign-in sign-up'}>
         <form onSubmit={handleSubmit}>
             <div className={'title'}>РЕГИСТРАЦИЯ</div>
