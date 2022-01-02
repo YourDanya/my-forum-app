@@ -7,7 +7,7 @@ import {withRouter} from "react-router-dom";
 const Header= ({history})=>{
     return <div className={'header'}>
         <img src={pathLogo} alt={'logo'} className={'logo'}/>
-        <div className={'forum-name'}>Danya FORUM</div>
+        <div className={'forum-name'} onClick={()=>history.push('/')}>Danya FORUM</div>
         <div className={'entered-user'}>
             <img src={defaultUser} alt={'user-ava'} className={'user-image'}/>
             <div className={'label'}>вы вошли как <br/> <span>анонимный пользователь №1</span></div>

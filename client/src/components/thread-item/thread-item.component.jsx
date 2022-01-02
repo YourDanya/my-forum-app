@@ -7,12 +7,17 @@ import {dateFormat} from "../../utils/date";
 import Post from "../post/post.component";
 import Pagination from "../pagination/pagination.component";
 import {pageCalc} from "../../utils/pages";
+import Modal from "../modal/modal.component";
 
 const ThreadItem = ({name, description, createdAt, likes, dislikes, author, posts}) => {
 
     const [currentPage, setPage] = useState(1)
 
     const {pagesCount, itemsOnPage} = pageCalc(posts, currentPage)
+
+    const [isModalActive, setModalActive]= useState(false)
+
+    const [textValue, setTextValue] = useState('')
 
     useEffect(() => {
         const handleScroll = () => {
@@ -23,8 +28,8 @@ const ThreadItem = ({name, description, createdAt, likes, dislikes, author, post
         return () => window.removeEventListener("scroll", handleScroll)
     }, [])
 
-    const iterate = () => {
-        console.log("scrolled");
+    const handleClick = () => {
+        setModalActive(true)
     }
 
     return <div className={'main'}>
@@ -53,10 +58,11 @@ const ThreadItem = ({name, description, createdAt, likes, dislikes, author, post
                     <div className={'reply-title'}>
                         Оставьте свой ответ
                     </div>
-                    <textarea placeholder="Ваш ответ автору">
-
-                    </textarea>
-                    <div className={'reply-button'}>
+                    <textarea placeholder="Ваш ответ автору"
+                              value={textValue}
+                              onChange={event=> setTextValue(event.target.value)}
+                    />
+                    <div className={'reply-button'} onClick={handleClick}>
                         Ответить
                     </div>
                 </div>
@@ -76,8 +82,8 @@ const ThreadItem = ({name, description, createdAt, likes, dislikes, author, post
             }
         </div>
 
-        <div className={'posts'} onScroll={iterate}>
-            {itemsOnPage.map((post, idx) => <Post {...post} key={idx}/>)}
+        <div className={'posts'} >
+            {itemsOnPage.map((post, idx) => <Post {...post} key={idx} handleClick={handleClick}/>)}
         </div>
 
         {
@@ -91,6 +97,15 @@ const ThreadItem = ({name, description, createdAt, likes, dislikes, author, post
                     />
                 </div> : null
         }
+
+        <Modal
+            isActive={isModalActive}
+            setActive={setModalActive}
+            isPost
+            threadName={name}
+            authorName={author.name}
+            text={textValue}
+        />
 
     </div>
 }

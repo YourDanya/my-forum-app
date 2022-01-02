@@ -5,7 +5,7 @@ import {dateFormat} from "../../utils/date";
 import avatar from './../../assets/avatars/avatar1.png'
 import {AiOutlineDislike, AiOutlineLike} from "react-icons/all";
 
-const Post = ({author:{name}, createdAt, number, post, likes, dislikes}) =>{
+const Post = ({author:{name}, createdAt, number, post, likes, dislikes, handleClick}) =>{
     return <div className={'threads post'}>
         <div className={'post-author'}>
             <img className={'img'} src={avatar} alt={'avatar'}/>
@@ -29,7 +29,9 @@ const Post = ({author:{name}, createdAt, number, post, likes, dislikes}) =>{
                     <span>{dislikes.count}</span>
                 </div>
             </div>
-            <div className={'reply'}>Ответить</div>
+            <div className={'reply'} onClick={handleClick}>
+                Ответить
+            </div>
         </div>
     </div>
 }
