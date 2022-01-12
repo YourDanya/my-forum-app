@@ -1,23 +1,68 @@
-import React, {useState} from 'react'
+import React, {useEffect, useState} from 'react'
+import {connect} from "react-redux";
 import './modal.styles.sass'
 import imgUrl from './../../assets/avatars/avatar1.png'
 import {ImCross} from "react-icons/all";
+import {clearUploadMessage, createPostStart, createThreadStart} from "../../redux/threads/threads.actions";
+import {createStructuredSelector} from "reselect";
+import {selectErrorMessage, selectIsUploading, selectUploadMessage} from "../../redux/threads/threads.selector";
+import Spinner from "../spinner/spinner.component";
+import {sleep} from "../../utils/other";
 
-const Modal = ({isActive, setActive, isPost, threadName, authorName, text}) => {
+const Modal = ({
+                   isActive, setActive, isPost, threadName, authorName, text, createPost,
+                   createThread, isUploading, uploadMessage, clearUploadMessage,
+                    errorMessage
+               }) => {
+    // console.log(error)
 
-    const initialTextValue= text? text :''
+    const initialTextValue = text ? text : ''
     const [textValue, setTextValue] = useState(initialTextValue)
+    const [inputValue, setInputValue] = useState('')
 
     const handleTextChange = event => {
         setTextValue(event.target.value)
     }
+    const handleInputValue = event => {
+        setInputValue(event.target.value)
+    }
 
-    return <div className={`modal ${isActive? 'active': ''}`} onClick={()=>setActive(false)}>
+    useEffect(async () => {
+        await sleep(3000)
+        if(uploadMessage && errorMessage){
+            clearUploadMessage()
+        }
+        else if(uploadMessage){
+            clearUploadMessage()
+            setTextValue('')
+            setInputValue('')
+            setActive(false)
+        }
+    }, [uploadMessage])
 
-        <form className={'modal-form'} onClick={event => event.stopPropagation()}>
+    const handleSubmit = async event => {
+        event.preventDefault()
+        isPost ?
+            createPost({}) :
+            createThread({
+                name: inputValue,
+                description: textValue
+            })
+        // await sleep(3000)
+        // if(!errorMessage){
+        // }
+        // clearUploadMessage()
+    }
+
+    return <div className={`modal ${isActive ? 'active' : ''}`} onClick={() => setActive(false)}>
+
+        <form className={'modal-form'} onClick={event => event.stopPropagation()} onSubmit={handleSubmit}>
             <div className={'modal-form-nav'}>
-                <div className={'modal-form-title'}>Добавить ответ</div>
-                <div className={'modal-form-cross'} onClick={()=>setActive(false)}>
+                <div className={'modal-form-title'}>
+                    Добавить {isPost ? 'ответ' : 'тему'}
+                </div>
+
+                <div className={'modal-form-cross'} onClick={() => setActive(false)}>
                     <ImCross/>
                 </div>
             </div>
@@ -25,22 +70,29 @@ const Modal = ({isActive, setActive, isPost, threadName, authorName, text}) => {
             <div className={'modal-form-content'}>
 
                 {
-                    isPost?
+                    isPost ?
                         <div className={'modal-form-label'}>
                             {threadName}
                         </div> :
-                        <input className={'modal-form-input'}>
+                        <input
+                            className={'modal-form-input'}
+                            value={inputValue}
+                            onChange={handleInputValue}
+                            placeholder={'Название темы'}
+                            required
+                        />
 
-                        </input>
                 }
 
                 <textarea className={'modal-form-text'}
                           value={textValue}
                           onChange={handleTextChange}
+                          placeholder={isPost ? 'Текст ответа' : 'Текст темы'}
+                          required
                 />
 
                 <div className={'modal-form-author'}>
-                    <img className={'modal-form-author-img'} src={imgUrl}/>
+                    <img className={'modal-form-author-img'} src={imgUrl} alt={'post author'}/>
                     <div className={'modal-form-author-name'}>
                         Автор <br/>
                         <span>
@@ -48,12 +100,43 @@ const Modal = ({isActive, setActive, isPost, threadName, authorName, text}) => {
                         </span>
                     </div>
                 </div>
-                <div className={'modal-form-button-wrapper'}>
-                    <button className={'modal-form-button'}>Добавить {isPost? 'ответ': 'тему'}</button>
+
+                <div className={'modal-form-footer'}>
+                    {
+                        isUploading ?
+                            <Spinner overlayStyles={{
+                                height: '40px',
+                                width: '40px',
+                                marginLeft: '8.28px'
+                            }} containerStyles={{
+                                height: '40px',
+                                width: '40px'
+                            }}/> :
+                        uploadMessage ? uploadMessage :
+                        <button className={'modal-form-button'}>Добавить {isPost ? 'ответ' : 'тему'}</button>
+                    }
+                    {
+                        errorMessage? <div className={'modal-form-error'}>
+                            {errorMessage}
+                        </div> : null
+                    }
                 </div>
+
             </div>
         </form>
     </div>
 }
 
-export default Modal
+const mapDispatchToProps = dispatch => ({
+    createPost: data => dispatch(createPostStart(data)),
+    createThread: data => dispatch(createThreadStart(data)),
+    clearUploadMessage: () => dispatch(clearUploadMessage())
+})
+
+const mapStateToProps = createStructuredSelector({
+    isUploading: selectIsUploading,
+    uploadMessage: selectUploadMessage,
+    errorMessage: selectErrorMessage
+})
+
+export default connect(mapStateToProps, mapDispatchToProps)(Modal)

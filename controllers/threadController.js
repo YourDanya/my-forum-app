@@ -1,5 +1,6 @@
 const factory= require('./handlerFactory')
 Thread=require(`./../models/threadModel.js`)
+const catchAsync= require('./../utils/catchAsync')
 
 exports.sendAuthor= async(req, res, next)=>{
     req.body.author=req.user.id;
@@ -10,4 +11,13 @@ exports.getAllThreads= factory.getAll(Thread)
 exports.getThread= factory.getOne(Thread)
 exports.deleteThread= factory.deleteOne(Thread)
 exports.updateThread=factory.updateOne(Thread)
-exports.createThread= factory.createOne(Thread)
+
+exports.createThread= catchAsync(async (req, res, next) => {
+    const doc=await Thread.create(req.body);
+    res.status(201).json({
+        status: 'success',
+        data: {
+            data: doc
+        }
+    })
+})

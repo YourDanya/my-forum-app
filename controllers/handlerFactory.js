@@ -41,8 +41,8 @@ exports.createOne = Model => exports.createTour= catchAsync(async (req, res, nex
   if(req.params.replyId){
     req.body.reply=doc._id
   }
-  if(Model===Thread) req.body.thread=doc._id
-    next()
+  // if(Model===Thread) req.body.thread=doc._id
+  //   next()
   res.status(201).json({
     status: 'success',
     data: {

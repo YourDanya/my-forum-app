@@ -1,22 +1,24 @@
 import React, {useState} from "react"
+import {connect} from "react-redux";
 
 import './sign-in.styles.sass'
 import {AiFillEye, AiFillEyeInvisible, AiOutlineLock, HiOutlineMail} from "react-icons/all";
+import {SignInStart} from "../../redux/user/user.actions";
 
 
-const SignIn= ()=>{
-
+const SignIn= ({signIn})=>{
     const [signInData, setSignInData]= useState({email:'', password:''})
     const {email, password}= signInData
     const [eye, setEye]= useState(true)
 
-    const handleChange= event=>{
+    const handleChange= event => {
         const {value, name}= event.target
         setSignInData({...signInData, [name]:value})
     }
 
     const handleSubmit= async event =>{
-
+        event.preventDefault()
+        signIn(signInData)
     }
 
     const onFocus = (event) => {
@@ -71,4 +73,8 @@ const SignIn= ()=>{
     </div>
 }
 
-export default SignIn
+const mapDispatchToProps= dispatch => ({
+    signIn: data => dispatch(SignInStart(data))
+})
+
+export default connect(null, mapDispatchToProps)(SignIn)

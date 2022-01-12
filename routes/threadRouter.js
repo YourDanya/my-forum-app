@@ -13,7 +13,9 @@ router
         authController.protect,
         threadController.sendAuthor,
         threadController.createThread,
-        userController.myThread);
+        // userController.myThread
+    );
+
 
 router
     .route('/:id')
@@ -34,9 +36,9 @@ router
     .route('/:id/createPost/')
     .post(
         authController.protect,
-        postController.sendData,
+        // postController.sendData,
         postController.createPost,
-        userController.myThread,
+        // userController.myThread,
     )
 
 router

@@ -7,12 +7,22 @@ export const selectThreads= createSelector(
     threadsStore => threadsStore.threads
 )
 
-export const selectIsThreadFetching = createSelector(
-    [selectThreadStore],
-    threadStore => threadStore.isFetched
-)
-
 export const selectCurrentThread = createSelector(
     [selectThreadStore],
     threadStore => threadStore.currentThread
+)
+
+export const selectUploadMessage =createSelector(
+    [selectThreadStore],
+    threadStore => threadStore.uploadMessage
+)
+
+export const selectIsUploading =createSelector(
+    [selectThreadStore],
+    threadStore => threadStore.isUploading
+)
+
+export const selectErrorMessage =createSelector(
+    [selectThreadStore],
+    threadStore => threadStore.errorMessage
 )

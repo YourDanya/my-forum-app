@@ -7,14 +7,13 @@ const threadSchema=new mongoose.Schema({
         id: Number,
         name: {
             type: String,
-            required: [true, `A tour must have a name`],
             trim: true,
-            maxlength: [100, 'a thread-item name must have less ot equal then 100 characters'],
-            minlength: [6, 'a thread-item name mush have more or equal then 6 characters'],
+            maxlength: [100, 'Название темы должно состоять из 100 или менее символов.'],
+            minlength: [6, 'Название темы должно состоять из 6 или более символов.'],
         },
         description: {
             type: String,
-            maxlength: [1500, 'a thread-item name must have less ot equal then 1000 characters']
+            maxlength: [1500, 'Описание темы должно иметь меньше 1500 символов.']
         },
         createdAt: {
             type: Date,

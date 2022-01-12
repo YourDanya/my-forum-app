@@ -7,23 +7,23 @@ const Footer= () =>{
     return <div className={'footer'}>
         <div className={'container'}>
             <div className={'footerSocials'}>
-                <a href="https://www.facebook.com/profile.php?id=100069601987597">
+                <div>
                     <FaFacebook/>
-                </a>
-                <a href="https://www.instagram.com/abn.bud/">
+                </div>
+                <div>
                     <FiInstagram/>
-                </a>
-                <a href="https://t.me/abnbud">
+                </div>
+                <div>
                     <FaTelegram/>
-                </a>
-                <a href="viber://chat?number=%2B380999115738">
+                </div>
+                <div>
                     <FaViber/>
-                </a>
-                <a href="https://wa.me/380735925381">
+                </div>
+                <div>
                     <IoLogoWhatsapp/>
-                </a>
+                </div>
             </div>
-            <div className={'footerCopyright'}>Danya Forum. COPYRIGHT</div>
+            <div className={'footerCopyright'}>© Danya FORUM. COPYRIGHT</div>
         </div>
     </div>
 }

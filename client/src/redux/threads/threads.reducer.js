@@ -5,10 +5,13 @@ const INITIAL_STATE= {
     currentThread: null,
     isFetching: false,
     errorMessage: undefined,
+    isUploading: false,
+    uploadMessage: null
 }
 
 const threadsReducer= (state= INITIAL_STATE, action) => {
     switch(action.type){
+
         case threadTypes.FETCH_THREADS_START:
             return{
                 ...state,
@@ -27,6 +30,33 @@ const threadsReducer= (state= INITIAL_STATE, action) => {
                 isFetching: false,
                 errorMessage: action.payload
             }
+
+
+        case threadTypes.CREATE_THREAD_START:
+            return{
+                ...state,
+                isUploading: true
+            }
+        case threadTypes.CREATE_THREAD_SUCCESS:
+            return{
+                ...state,
+                isUploading: false,
+                errorMessage: null,
+                uploadMessage: 'Тема успешно создана'
+            }
+        case threadTypes.CREATE_THREAD_FAILURE:
+            return{
+                ...state,
+                isUploading: false,
+                errorMessage: action.payload,
+                uploadMessage: 'Что-то пошло не так...'
+            }
+        case threadTypes.CLEAR_UPLOAD_MESSAGE:
+            return{
+                ...state,
+                uploadMessage: null
+            }
+
         default:
             return {
                 ...state
