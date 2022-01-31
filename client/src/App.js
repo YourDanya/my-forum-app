@@ -12,7 +12,7 @@ import SignUp from "./components/sign-up/sign-up.component";
 import ThreadItemContainer from "./components/thread-item/thread-item.container";
 import Profile from "./components/profile/profile.component";
 import {createStructuredSelector} from "reselect";
-import {getUser} from "./redux/user/user.selector";
+import {selectUser} from "./redux/user/user.selector";
 import {connect} from "react-redux";
 import {GetUserFromCookieStart} from "./redux/user/user.actions";
 
@@ -45,7 +45,7 @@ const App= ({user, isLoggedIn})=> {
 }
 
 const mapStateToProps= createStructuredSelector({
-    user: getUser
+    user: selectUser
 })
 
 const mapDispatchToProps= dispatch => ({

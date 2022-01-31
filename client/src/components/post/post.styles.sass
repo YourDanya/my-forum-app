@@ -5,6 +5,7 @@
   margin-top: 0
   margin-bottom: 20px
   &-author
+    color:
     border-bottom: 1px solid rgb(212, 228, 247)
     display: flex
     align-items: center
@@ -43,14 +44,15 @@
         color: #7b92ad
         margin-right: 20px
         font-size: 19px
-        svg
-          cursor: pointer
+        cursor: pointer
         span
           margin-left: 2px
           font-size: 14px
       .dislike
         svg
           transform: translateY(3px)
+      .liked, .disliked
+        color: black
     .reply
       margin-right: 10px
       color: #be007f

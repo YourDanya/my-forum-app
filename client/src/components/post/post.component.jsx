@@ -1,35 +1,60 @@
-import React from 'react'
+import React, {useState} from 'react'
 import './post.styles.sass'
 import './../thread-collection/thread-collection.styles.sass'
 import {dateFormat} from "../../utils/date";
 import avatar from './../../assets/avatars/avatar1.png'
-import {AiOutlineDislike, AiOutlineLike} from "react-icons/all";
+import {AiOutlineDislike, AiOutlineLike, AiTwotoneDislike, AiTwotoneLike} from "react-icons/all";
+import PostReply from "../post-reply/post-reply.component";
+import {likeDislikeStart} from "../../redux/threads/threads.actions";
+import {connect} from "react-redux";
+import LikesDislikes from "../likes-dislikes/LikesDislikes.component";
 
-const Post = ({author:{name}, createdAt, number, post, likes, dislikes, handleClick}) =>{
+const Post = ({
+                  author, createdAt, number, post, likes, dislikes, handleModal, reply, _id,
+                  threadId
+              }) => {
+
+    const name= author.name
+    const userId = author.id
+
     return <div className={'threads post'}>
+
         <div className={'post-author'}>
             <img className={'img'} src={avatar} alt={'avatar'}/>
-            <div className={'name'}> <span>Автор</span> <br/> {name}</div>
+            <div className={'name'}><span>Автор</span> <br/> {name}</div>
         </div>
+
         <div className={'post-content'}>
             <div className={'block'}>
                 <div className={'date'}>{dateFormat(createdAt)}</div>
                 <div className={'number'}>#{number}</div>
             </div>
+            {
+                reply ?
+                    <PostReply
+                        author={reply.author.name}
+                        post={reply.post}
+                        styles={{
+                            marginTop: '10px'
+                        }}
+                    /> : null
+            }
             <div className={'text'}>{post}</div>
         </div>
+
         <div className={'post-footer'}>
-            <div className={'stats'}>
-                <div className={'like'}>
-                    <AiOutlineLike onClick={()=> console.log('iiiiii')}/>
-                    <span>{likes.count}</span>
-                </div>
-                <div className={'like dislike'}>
-                    <AiOutlineDislike/>
-                    <span>{dislikes.count}</span>
-                </div>
-            </div>
-            <div className={'reply'} onClick={handleClick}>
+
+            <LikesDislikes
+                likes={likes}
+                dislikes={dislikes}
+                userId={userId}
+                threadId={threadId}
+                postNum={number}
+            />
+
+            <div className={'reply'} onClick={() => {
+                handleModal({author: name, post, postId: _id})
+            }}>
                 Ответить
             </div>
         </div>

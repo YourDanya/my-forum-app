@@ -51,12 +51,32 @@ const threadsReducer= (state= INITIAL_STATE, action) => {
                 errorMessage: action.payload,
                 uploadMessage: 'Что-то пошло не так...'
             }
+
+        case threadTypes.CREATE_POST_START:
+            return{
+                ...state,
+                isUploading: true
+            }
+        case threadTypes.CREATE_POST_SUCCESS:
+            return{
+                ...state,
+                isUploading: false,
+                errorMessage: null,
+                uploadMessage: 'Ответ успешно добавлен'
+            }
+        case threadTypes.CREATE_POST_FAILURE:
+            return{
+                ...state,
+                isUploading: false,
+                errorMessage: action.payload,
+                uploadMessage: 'Что-то пошло не так...'
+            }
         case threadTypes.CLEAR_UPLOAD_MESSAGE:
             return{
                 ...state,
                 uploadMessage: null
             }
-
+            
         default:
             return {
                 ...state

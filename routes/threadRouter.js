@@ -14,8 +14,7 @@ router
         threadController.sendAuthor,
         threadController.createThread,
         // userController.myThread
-    );
-
+    )
 
 router
     .route('/:id')
@@ -33,7 +32,7 @@ router
         threadController.updateThread);
 
 router
-    .route('/:id/createPost/')
+    .route('/:id/createPost')
     .post(
         authController.protect,
         // postController.sendData,
@@ -45,42 +44,39 @@ router
     .route('/:id/createPost/:replyId')
     .post(
         authController.protect,
-        postController.sendData,
+        // postController.sendData,
         postController.createPost,
-        postController.sendReply,
-        userController.myThread,
+        // postController.sendReply,
+        // userController.myThread,
     )
 
 router
     .route('/:id/like')
-    .get(
+    .post(
         authController.protect,
         handlerFactory.like
     )
 
 router
     .route('/:id/dislike')
-    .get(
+    .post(
         authController.protect,
         handlerFactory.dislike
     )
 
 router
     .route('/:id/like/:postNum')
-    .get(
+    .post(
         authController.protect,
         handlerFactory.like
     )
 
 router
     .route('/:id/dislike/:postNum')
-    .get(
+    .post(
         authController.protect,
         handlerFactory.dislike
     )
-
-
-
 
 module.exports=router;
 

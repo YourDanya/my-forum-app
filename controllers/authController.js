@@ -92,6 +92,8 @@ exports.logout = (req, res) => {
 
 exports.protect =catchAsync(async(req, res, next)=>{
   // get token and check
+  console.log('////////////////////////')
+  console.log(req.cookies)
   let token
   if(req.headers.authorization && req.headers.authorization.startsWith('Bearer')){
     token= req.headers.authorization.split(' ')[1]
@@ -125,8 +127,10 @@ exports.protect =catchAsync(async(req, res, next)=>{
   next()
 })
 
-exports.isLoggedIn = async (req, res, next) => {
+exports.isLoggedIn = catchAsync(async (req, res, next) => {
 
+  console.log('inside isLogged in')
+  console.log(req.cookies)
   req.user=null
 
   if (req.cookies.jwt) {
@@ -157,7 +161,7 @@ exports.isLoggedIn = async (req, res, next) => {
     }
   }
   next()
-}
+} )
 
 exports.restrictTo = (...roles) => {
   return (req, res, next) => {

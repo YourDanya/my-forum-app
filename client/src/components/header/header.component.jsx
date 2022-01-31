@@ -5,6 +5,8 @@ import defaultUser from '../../assets/avatars/avatar1.png'
 import {withRouter} from "react-router-dom";
 import {connect} from "react-redux";
 import {SignOutStart} from "../../redux/user/user.actions";
+import {createStructuredSelector} from "reselect";
+import {selectUserName} from "../../redux/user/user.selector";
 
 const Header = ({history, user, signOut}) => {
     return <div className={'header'}>
@@ -12,7 +14,11 @@ const Header = ({history, user, signOut}) => {
         <div className={'forum-name'} onClick={() => history.push('/')}>Danya FORUM</div>
         <div className={'entered-user'}>
             <img src={defaultUser} alt={'user-ava'} className={'user-image'}/>
-            <div className={'label'}>вы вошли как <br/> <span>анонимный пользователь №1</span></div>
+            <div className={'label'}>вы вошли как <br/> <span>
+                {
+                   user? user.name : 'анонимный пользователь №1'
+                }
+            </span></div>
         </div>
 
         {

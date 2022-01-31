@@ -7,7 +7,7 @@ const crypto= require('crypto')
 const userSchema=new mongoose.Schema({
   name: {
     type: String,
-    required: [true, `please tell us your name`],
+    required: [true, `должно быть имя`],
     trim: true
   },
   myThreads: [
@@ -43,10 +43,10 @@ const userSchema=new mongoose.Schema({
   },
   email: {
     type: String,
-    required: [true, `please provide your email`],
+    required: [true, `должен быть email`],
     unique: true,
     lowercase: true,
-    validate: [validator.isEmail, 'please provide a valid email']
+    validate: [validator.isEmail, 'должен быть email']
   },
   photo: {
     type: String,
@@ -54,18 +54,18 @@ const userSchema=new mongoose.Schema({
   },
   role: {
     type: String,
-    enum: ['user', 'admin', 'guide', 'lead-guide'],
+    enum: ['user', 'admin'],
     default: 'user'
   },
   password: {
     type: String,
-    required: [true, 'A tour must have a password'],
+    required: [true, 'Должен быть пароль'],
     minlength: 6,
     select: false
   },
   passwordConfirm: {
     type: String,
-    required: [true, 'A tour must have a passwordConfirm'],
+    required: [true, 'Должно быть подтверждение пароля'],
     validate: {
       // this only works on create or save
       validator: function(el) {
@@ -91,13 +91,10 @@ const userSchema=new mongoose.Schema({
 });
 
 userSchema.pre('save', async function(next) {
-  // Only run this function if password was actually modified
   if (!this.isModified('password')) return next();
 
-  // Hash the password with cost of 12
   this.password = await bcrypt.hash(this.password, 12);
 
-  // Delete passwordConfirm field
   this.passwordConfirm = undefined;
   next();
 });

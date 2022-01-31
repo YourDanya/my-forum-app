@@ -43,3 +43,14 @@ export const clearUploadMessage = () =>({
     type: threadTypes.CLEAR_UPLOAD_MESSAGE
 })
 
+export const likeDislikeStart = data =>({
+    type: threadTypes.LIKE_DISLIKE_START,
+    payload: data
+})
+export const likeDislikeSuccess = () =>({
+    type: threadTypes.LIKE_DISLIKE_SUCCESS
+})
+export const likeDislikeFailure = errorMessage =>({
+    type: threadTypes.LIKE_DISLIKE_FAILURE,
+    payload: errorMessage
+})

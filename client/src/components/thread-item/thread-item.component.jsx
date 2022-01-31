@@ -1,58 +1,55 @@
-import React, {useEffect, useState} from 'react'
+import React, { useState} from 'react'
 import '../thread-collection/thread-collection.styles.sass'
 import './thread-item.styles.sass'
 import avatarPath from '../../assets/avatars/avatar1.png'
-import {AiOutlineDislike, AiOutlineLike} from "react-icons/all";
 import {dateFormat} from "../../utils/date";
 import Post from "../post/post.component";
 import Pagination from "../pagination/pagination.component";
 import {pageCalc} from "../../utils/pages";
 import Modal from "../modal/modal.component";
+import {connect} from "react-redux";
+import {createStructuredSelector} from "reselect";
+import {selectUserId} from "../../redux/user/user.selector";
+import LikesDislikes from "../likes-dislikes/LikesDislikes.component";
 
-const ThreadItem = ({name, description, createdAt, likes, dislikes, author, posts}) => {
+const ThreadItem = (
+    {
+        name, description, createdAt, likes, dislikes, author, posts, id,
+        userId
+    }) => {
 
     const [currentPage, setPage] = useState(1)
-
     const {pagesCount, itemsOnPage} = pageCalc(posts, currentPage)
 
-    const [isModalActive, setModalActive]= useState(false)
+    const [isModalActive, setModalActive] = useState(false)
 
     const [textValue, setTextValue] = useState('')
+    const [reply, setReply] = useState(null)
 
-    useEffect(() => {
-        const handleScroll = () => {
-            // code here will be executed on the scroll event
-        }
-        window.addEventListener("scroll", handleScroll)
-
-        return () => window.removeEventListener("scroll", handleScroll)
-    }, [])
-
-    const handleClick = () => {
+    const handleModal = reply => {
         setModalActive(true)
+        if (reply) setReply(reply)
     }
 
     return <div className={'main'}>
+
         <div className={'threads item'}>
             <div className={'name'}>{name}</div>
             <div className={'description'}>{description}</div>
             <div className={'date'}>{dateFormat(createdAt)}</div>
             <div className={'info'}>
+
                 <div className={'author'}>
                     <img src={avatarPath} alt={'avatar'}/>
                     <div className={'author-name'}><span>Автор</span> <br/> {author.name}</div>
                 </div>
 
-                <div className={'stats'}>
-                    <div className={'like'}>
-                        <AiOutlineLike/>
-                        <span>{likes.count}</span>
-                    </div>
-                    <div className={'like dislike'}>
-                        <AiOutlineDislike/>
-                        <span>{dislikes.count}</span>
-                    </div>
-                </div>
+                <LikesDislikes
+                    likes={likes}
+                    dislikes={dislikes}
+                    userId={userId}
+                    threadId={id}
+                />
 
                 <div className={'reply'}>
                     <div className={'reply-title'}>
@@ -60,9 +57,9 @@ const ThreadItem = ({name, description, createdAt, likes, dislikes, author, post
                     </div>
                     <textarea placeholder="Ваш ответ автору"
                               value={textValue}
-                              onChange={event=> setTextValue(event.target.value)}
+                              onChange={event => setTextValue(event.target.value)}
                     />
-                    <div className={'reply-button'} onClick={handleClick}>
+                    <div className={'reply-button'} onClick={() => handleModal()}>
                         Ответить
                     </div>
                 </div>
@@ -82,12 +79,23 @@ const ThreadItem = ({name, description, createdAt, likes, dislikes, author, post
             }
         </div>
 
-        <div className={'posts'} >
-            {itemsOnPage.map((post, idx) => <Post {...post} key={idx} handleClick={handleClick}/>)}
+        <div className={'posts'}>
+            {
+                itemsOnPage.map((post, idx) =>
+
+                    <Post
+                        {...post}
+                        key={idx}
+                        handleModal={handleModal}
+                        threadId={id}
+                        userId
+                    />
+                )
+            }
         </div>
 
         {
-            pagesCount > 0 ?
+            pagesCount > 1 ?
                 <div className={'threads posts-pagination'}>
                     <Pagination
                         pagesCount={pagesCount}
@@ -103,11 +111,17 @@ const ThreadItem = ({name, description, createdAt, likes, dislikes, author, post
             setActive={setModalActive}
             isPost
             threadName={name}
+            threadId={id}
             authorName={author.name}
+            reply={reply}
             text={textValue}
         />
 
     </div>
 }
 
-export default ThreadItem
+const mapStateToProps = createStructuredSelector({
+    userId: selectUserId
+})
+
+export default connect(mapStateToProps)(ThreadItem)

@@ -114,7 +114,7 @@ app.use('/api/v1/users', userRouter)
 app.use('/api/v1/messages', messageRouter)
 
 app.all('*', (req, res, next)=>{
-   next(new appError(`can t find ${req.originalUrl} on this server`, 404))
+   next(new appError(`can't find ${req.originalUrl} on this server`, 404))
 })
 
 

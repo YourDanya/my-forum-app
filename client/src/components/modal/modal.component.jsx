@@ -8,31 +8,34 @@ import {createStructuredSelector} from "reselect";
 import {selectErrorMessage, selectIsUploading, selectUploadMessage} from "../../redux/threads/threads.selector";
 import Spinner from "../spinner/spinner.component";
 import {sleep} from "../../utils/other";
+import PostReply from "../post-reply/post-reply.component";
 
 const Modal = ({
                    isActive, setActive, isPost, threadName, authorName, text, createPost,
                    createThread, isUploading, uploadMessage, clearUploadMessage,
-                    errorMessage
+                   errorMessage, reply, threadId
                }) => {
-    // console.log(error)
 
-    const initialTextValue = text ? text : ''
-    const [textValue, setTextValue] = useState(initialTextValue)
+    const [textValue, setTextValue] = useState('')
     const [inputValue, setInputValue] = useState('')
+
+    useEffect(() => setTextValue(text), [text])
+
+    console.log(textValue)
 
     const handleTextChange = event => {
         setTextValue(event.target.value)
     }
+
     const handleInputValue = event => {
         setInputValue(event.target.value)
     }
 
     useEffect(async () => {
         await sleep(3000)
-        if(uploadMessage && errorMessage){
+        if (uploadMessage && errorMessage) {
             clearUploadMessage()
-        }
-        else if(uploadMessage){
+        } else if (uploadMessage) {
             clearUploadMessage()
             setTextValue('')
             setInputValue('')
@@ -43,18 +46,22 @@ const Modal = ({
     const handleSubmit = async event => {
         event.preventDefault()
         isPost ?
-            createPost({}) :
+            createPost({
+                threadId,
+                post: textValue,
+                postId: reply.postId
+            }) :
             createThread({
                 name: inputValue,
                 description: textValue
             })
-        // await sleep(3000)
-        // if(!errorMessage){
-        // }
-        // clearUploadMessage()
     }
 
-    return <div className={`modal ${isActive ? 'active' : ''}`} onClick={() => setActive(false)}>
+
+    return <div className={`modal ${isActive ? 'active' : ''}`} onClick={() => {
+        setActive(false)
+        setTextValue(text)
+    }}>
 
         <form className={'modal-form'} onClick={event => event.stopPropagation()} onSubmit={handleSubmit}>
             <div className={'modal-form-nav'}>
@@ -68,6 +75,15 @@ const Modal = ({
             </div>
 
             <div className={'modal-form-content'}>
+
+                {
+                    reply ? <PostReply {...reply}
+                                       styles={{
+                                           marginBottom: '10px'
+                                       }}
+                        />
+                        : null
+                }
 
                 {
                     isPost ?
@@ -112,11 +128,11 @@ const Modal = ({
                                 height: '40px',
                                 width: '40px'
                             }}/> :
-                        uploadMessage ? uploadMessage :
-                        <button className={'modal-form-button'}>Добавить {isPost ? 'ответ' : 'тему'}</button>
+                            uploadMessage ? uploadMessage :
+                                <button className={'modal-form-button'}>Добавить {isPost ? 'ответ' : 'тему'}</button>
                     }
                     {
-                        errorMessage? <div className={'modal-form-error'}>
+                        errorMessage ? <div className={'modal-form-error'}>
                             {errorMessage}
                         </div> : null
                     }

@@ -6,6 +6,8 @@ const router=express.Router()
 
 const upload=multer({dest: 'public/img/users'})
 
+router.get('/test', authController.isLoggedIn)
+
 router.get('/', authController.isLoggedIn, authController.sendUser)
 router.post('/signup', authController.signup)
 router.post('/login', authController.login)
