@@ -76,7 +76,11 @@ const threadsReducer= (state= INITIAL_STATE, action) => {
                 ...state,
                 uploadMessage: null
             }
-            
+        case threadTypes.CLEAR_CURRENT_THREAD:
+            return{
+                ...state,
+                currentThread: null
+            }
         default:
             return {
                 ...state

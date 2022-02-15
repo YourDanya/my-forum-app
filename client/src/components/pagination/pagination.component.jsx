@@ -42,7 +42,6 @@ const Pagination= ({currentPage, setPage, pagesCount, styles}) => {
             return
         }
         if(!isNaN(elem)){
-            console.log('yes')
             setPage(elem)
         }
         else if(elem==='<' && currentPage!==1){

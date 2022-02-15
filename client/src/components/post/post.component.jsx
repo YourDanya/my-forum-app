@@ -1,4 +1,4 @@
-import React, {useState} from 'react'
+import React, {useEffect, useState} from 'react'
 import './post.styles.sass'
 import './../thread-collection/thread-collection.styles.sass'
 import {dateFormat} from "../../utils/date";

@@ -1,4 +1,4 @@
-import React, { useState} from 'react'
+import React, {useEffect, useRef, useState} from 'react'
 import '../thread-collection/thread-collection.styles.sass'
 import './thread-item.styles.sass'
 import avatarPath from '../../assets/avatars/avatar1.png'
@@ -18,18 +18,48 @@ const ThreadItem = (
         userId
     }) => {
 
-    const [currentPage, setPage] = useState(1)
-    const {pagesCount, itemsOnPage} = pageCalc(posts, currentPage)
-
     const [isModalActive, setModalActive] = useState(false)
 
     const [textValue, setTextValue] = useState('')
     const [reply, setReply] = useState(null)
 
+    const [currentPage, setPage] = useState(1)
+
+    const {pagesCount, itemsOnPage} = pageCalc(posts, currentPage)
+
     const handleModal = reply => {
         setModalActive(true)
         if (reply) setReply(reply)
     }
+
+    const ref = useRef()
+
+    const [sticky, setSticky] = useState(false)
+
+    useEffect(() => {
+
+        if (pagesCount > 1) {
+            const cachedRef = ref.current
+            const observer = new IntersectionObserver(
+                ([entry]) => {
+                    if (entry.intersectionRatio > 0) {
+                        setSticky(true)
+                    } else {
+                        setSticky(false)
+                    }
+                },
+                {
+                    threshold: 0,
+                    rootMargin: `0px 0px -${window.innerHeight-1}px 0px`
+                }
+            )
+
+            observer.observe(cachedRef)
+
+            return () => observer.unobserve(cachedRef)
+        }
+
+    }, [pagesCount])
 
     return <div className={'main'}>
 
@@ -79,13 +109,13 @@ const ThreadItem = (
             }
         </div>
 
-        <div className={'posts'}>
+        <div className={'posts'} ref={ref}>
             {
-                itemsOnPage.map((post, idx) =>
+                itemsOnPage.map((post) =>
 
                     <Post
                         {...post}
-                        key={idx}
+                        key={post.number}
                         handleModal={handleModal}
                         threadId={id}
                         userId
@@ -96,7 +126,7 @@ const ThreadItem = (
 
         {
             pagesCount > 1 ?
-                <div className={'threads posts-pagination'}>
+                <div className={`threads posts-pagination ${sticky? 'sticky' : ''}`}>
                     <Pagination
                         pagesCount={pagesCount}
                         setPage={setPage}

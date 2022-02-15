@@ -17,7 +17,9 @@ const ThreadCollection= ({threads, ...otherProps})=>{
         {
             threads.map((thread, idx) => <ThreadOverview key={idx} thread={thread}/>)
         }
-        <Pagination {...otherProps} styles={{bottom: '13px'}}/>
+        <Pagination {...otherProps} styles={{
+            bottom: '13px',
+        }}/>
 
         <div className={'add-thread-cover'}>
             <button className={'add-thread-button'} onClick={handleClick}>

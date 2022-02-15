@@ -43,6 +43,10 @@ export const clearUploadMessage = () =>({
     type: threadTypes.CLEAR_UPLOAD_MESSAGE
 })
 
+export const clearCurrentThread = () =>({
+    type: threadTypes.CLEAR_CURRENT_THREAD
+})
+
 export const likeDislikeStart = data =>({
     type: threadTypes.LIKE_DISLIKE_START,
     payload: data

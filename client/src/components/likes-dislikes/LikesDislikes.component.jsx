@@ -1,4 +1,4 @@
-import React, {useState} from "react"
+import React, {useEffect, useState} from "react"
 import './LikesDislikes.styles.sass'
 import {AiOutlineDislike, AiOutlineLike, AiTwotoneDislike, AiTwotoneLike} from "react-icons/all";
 import {likeDislikeStart} from "../../redux/threads/threads.actions";
@@ -27,10 +27,13 @@ const LikesDislikes = ({styles, likes, dislikes, userId, threadId, postNum, like
             }
         }
 
-        return {liked, disliked, likesCount: likes.users.length, dislikesCount: dislikes.users.length}
+        return  {liked, disliked, likesCount: likes.users.length, dislikesCount: dislikes.users.length}
+
     }
 
-    const [likedDislikedInfo, setLikedDislikedInfo] = useState(isLikedDisliked(likes, dislikes))
+    let res= isLikedDisliked(likes, dislikes)
+
+    const [likedDislikedInfo, setLikedDislikedInfo] = useState(res)
 
     const handleLikesDislikes = (option, likedDislikedInfo) => {
 

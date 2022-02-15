@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react'
+import React, {useEffect, useRef, useState} from 'react'
 import {connect} from "react-redux";
 import './modal.styles.sass'
 import imgUrl from './../../assets/avatars/avatar1.png'
@@ -21,7 +21,6 @@ const Modal = ({
 
     useEffect(() => setTextValue(text), [text])
 
-    console.log(textValue)
 
     const handleTextChange = event => {
         setTextValue(event.target.value)
@@ -77,12 +76,12 @@ const Modal = ({
             <div className={'modal-form-content'}>
 
                 {
-                    reply ? <PostReply {...reply}
+                    reply ?
+                        <PostReply {...reply}
                                        styles={{
                                            marginBottom: '10px'
                                        }}
-                        />
-                        : null
+                        /> : null
                 }
 
                 {
