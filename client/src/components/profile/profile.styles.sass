@@ -2,10 +2,15 @@
   padding: 20px
   display: flex
   flex-wrap: wrap
+  width: 100%
+  min-height: 595px
   &-sidebar
     width: 30%
-    background: linear-gradient(240deg, #44576e, #333)
+    background: #181c2c
     padding-top: 30px
+    &-links
+      position: sticky
+      top: 30px
     &-link
       padding-left: 30px
       display: flex
@@ -17,6 +22,7 @@
       cursor: pointer
       transition: all 0.8s
       svg
+        color: #1caac9
         margin-right: 5px
         font-size: 22px
       &:hover
@@ -28,3 +34,6 @@
           padding-left: 30px
   &-main
     width: 70%
+    display: flex
+    justify-content: center
+    background-color: white

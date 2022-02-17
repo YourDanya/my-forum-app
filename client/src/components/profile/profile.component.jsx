@@ -21,42 +21,43 @@ const Profile = ({history, match}) => {
 
     return <div className={'profile'}>
         <div className={'profile-sidebar'}>
-
-            <div className={`profile-sidebar-link ${links.settings ? 'select' : ''}`}
-                 onClick={() => {
-                     history.push(`${match.url}/settings`)
-                     setLinks({...links, [links.tempLink]: false, settings: true, tempLink: 'settings'})
-                 }}>
-                <FiSettings/>
-                НАСТРОЙКИ
-            </div>
-            <div className={`profile-sidebar-link ${links.myReplies ? 'select' : ''}`}
-                 onClick={() => {
-                     history.push(`${match.url}/my-replies`)
-                     setLinks({...links, [links.tempLink]: false, myReplies: true, tempLink: 'myReplies'})
-                 }}>
-                <RiQuestionAnswerLine/>
-                МОИ ОТВЕТЫ
-            </div>
-            <div className={`profile-sidebar-link ${links.myThreads ? 'select' : ''}`}
-                 onClick={() => {
-                     history.push(`${match.url}/my-threads`)
-                     setLinks({...links, [links.tempLink]: false, myThreads: true, tempLink: 'myThreads'})
-                 }}>
-                <RiFileList3Line/>
-                МОИ ТЕМЫ
-            </div>
-            <div className={`profile-sidebar-link ${links.myBillings ? 'select' : ''}`}
-                 onClick={() => {
-                     history.push(`${match.url}/my-billings`)
-                     setLinks({...links, [links.tempLink]: false, myBillings: true, tempLink: 'myBillings'})
-                 }}>
-                <FaRegMoneyBillAlt/>
-                МОИ ПОКУПКИ
+            <div className={'profile-sidebar-links'}>
+                <div className={`profile-sidebar-link ${links.settings ? 'select' : ''}`}
+                     onClick={() => {
+                         history.push(`${match.url}/my-settings`)
+                         setLinks({...links, [links.tempLink]: false, settings: true, tempLink: 'settings'})
+                     }}>
+                    <FiSettings/>
+                    НАСТРОЙКИ
+                </div>
+                <div className={`profile-sidebar-link ${links.myReplies ? 'select' : ''}`}
+                     onClick={() => {
+                         history.push(`${match.url}/my-replies`)
+                         setLinks({...links, [links.tempLink]: false, myReplies: true, tempLink: 'myReplies'})
+                     }}>
+                    <RiQuestionAnswerLine/>
+                    МОИ ОТВЕТЫ
+                </div>
+                <div className={`profile-sidebar-link ${links.myThreads ? 'select' : ''}`}
+                     onClick={() => {
+                         history.push(`${match.url}/my-threads`)
+                         setLinks({...links, [links.tempLink]: false, myThreads: true, tempLink: 'myThreads'})
+                     }}>
+                    <RiFileList3Line/>
+                    МОИ ТЕМЫ
+                </div>
+                <div className={`profile-sidebar-link ${links.myBillings ? 'select' : ''}`}
+                     onClick={() => {
+                         history.push(`${match.url}/my-billings`)
+                         setLinks({...links, [links.tempLink]: false, myBillings: true, tempLink: 'myBillings'})
+                     }}>
+                    <FaRegMoneyBillAlt/>
+                    МОИ ПОКУПКИ
+                </div>
             </div>
         </div>
         <div className={'profile-main'}>
-            <Route path={`${match.url}/settings`} exact component={Settings}/>
+            <Route path={`${match.url}/my-settings`} exact component={Settings}/>
             <Route path={`${match.url}/my-replies`} exact component={MyReplies}/>
             <Route path={`${match.url}/my-threads`} exact component={MyThreads}/>
             <Route path={`${match.url}/my-billings`} exact component={MyBillings}/>

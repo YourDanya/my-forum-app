@@ -6,25 +6,33 @@ import {createStructuredSelector} from "reselect";
 import Spinner from "../spinner/spinner.component";
 import {selectCurrentThread} from "../../redux/threads/threads.selector";
 
-const ThreadItemContainer = ({match:{params:{threadId}}, data, clearThread}) =>{
-    console.log(clearThread)
-    const dispatch= useDispatch()
-    useEffect(()=>{
+const ThreadItemContainer = ({match: {params: {threadId}}, data, clearThread}) => {
+    const dispatch = useDispatch()
+
+    useEffect(() => {
         dispatch(fetchThreadsStart(threadId))
         return () => {
-            console.log('UNMOUNT')
             clearThread()
         }
     }, [dispatch, threadId])
 
-    return !data? <Spinner/> : <ThreadItem {...data}/>
+    return(
+        <>
+            {
+                !data ?
+                    <Spinner overlayStyles={{width: '70%'}}/>
+                    : <ThreadItem {...data}/>
+            }
+        </>
+    )
+
 }
 
-const mapStateToProps=createStructuredSelector({
+const mapStateToProps = createStructuredSelector({
     data: selectCurrentThread
 })
 
-const mapDispatchToProps= dispatch => ({
+const mapDispatchToProps = dispatch => ({
     clearThread: () => dispatch(clearCurrentThread())
 })
 

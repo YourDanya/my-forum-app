@@ -18,6 +18,8 @@ const ThreadItem = (
         userId
     }) => {
 
+    console.log('inside thread item component')
+
     const [isModalActive, setModalActive] = useState(false)
 
     const [textValue, setTextValue] = useState('')
@@ -35,6 +37,8 @@ const ThreadItem = (
     const ref = useRef()
 
     const [sticky, setSticky] = useState(false)
+
+    console.log(author)
 
     useEffect(() => {
 

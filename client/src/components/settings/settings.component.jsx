@@ -95,9 +95,6 @@ const Settings= ({name, email}) =>{
                 <button className={'settings-form-button second'}>сменить пароль</button>
             </div>
         </form>
-
-
-
     </div>
 }
 

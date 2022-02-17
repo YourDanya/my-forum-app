@@ -1,0 +1,35 @@
+.menu
+  border: 1px solid #d4e4f7
+  border-radius: 5px
+  margin-top: 20px
+  margin-left: 20px
+  width: calc(30% - 20px)
+  align-self: flex-start
+  position: sticky
+  top: 10px
+  display: flex
+  background-color: white
+  &-items
+    width: 100%
+    border-radius: 10px
+    padding: 20px
+    display: flex
+    flex-direction: column
+  &-item
+    font-weight: 500
+    padding: 2px
+    width: 100%
+    text-decoration: none
+    border-bottom: 2px solid #7e7e7e
+    display: flex
+    align-items: center
+    transition: 0.1s all
+    &:hover
+      transform: scale(1.09)
+    svg
+      color: black
+      font-size: 20px
+    &-text
+      margin-left: 5px
+      cursor: pointer
+      color: black

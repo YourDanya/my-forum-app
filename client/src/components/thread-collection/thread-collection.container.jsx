@@ -17,11 +17,21 @@ const ThreadCollectionContainer= ({threads}) =>{
     const [currentPage, setPage]=useState(1)
 
     if(!threads) {
-        return <Spinner/>
+        return <Spinner overlayStyles={{width: '70%'}}/>
     }
+
     else {
         const {pagesCount, itemsOnPage} = pageCalc(threads, currentPage)
-        return <ThreadCollection threads={itemsOnPage} currentPage={currentPage} setPage={setPage} pagesCount={pagesCount}/>
+        return (
+            <>
+                <ThreadCollection
+                    threads={itemsOnPage}
+                    currentPage={currentPage}
+                    setPage={setPage}
+                    pagesCount={pagesCount}
+                />
+            </>
+        )
     }
 
 }

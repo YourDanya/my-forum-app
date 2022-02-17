@@ -15,10 +15,11 @@ import {createStructuredSelector} from "reselect";
 import {selectUser} from "./redux/user/user.selector";
 import {connect} from "react-redux";
 import {GetUserFromCookieStart} from "./redux/user/user.actions";
+import Menu from "./components/menu/menu.component";
 
-const App= ({user, isLoggedIn})=> {
+const App = ({user, isLoggedIn}) => {
 
-    useEffect(()=>{
+    useEffect(() => {
         isLoggedIn()
     }, [])
 
@@ -27,28 +28,29 @@ const App= ({user, isLoggedIn})=> {
     return <div className={'App'}>
         <div className={'App-content'}>
             <Header user={user}/>
-            <Switch>
+            {/*<Switch>*/}
                 <Route path={'/'} exact component={ThreadCollectionContainer}/>
                 <Route path={'/threads/:threadId'} exact component={ThreadItemContainer}/>
-                <Route path={'/myThreads'} component={MyThreads}/>
-                <Route path={'/myReplies'} component={MyReplies}/>
-                <Route path={'/sign-in'} render={()=>(
-                    user? <Redirect to={'/'}/>
-                    : <SignIn/>
-                )}/>
+                <Route
+                    path={'/sign-in'}
+                    render={() => (
+                        user ? <Redirect to={'/'}/>
+                            : <SignIn/>
+                    )}/>
+                <Route path={["/", "/threads/:threadId"]}  exact component={Menu}/>
                 <Route path={'/sign-up'} component={SignUp}/>
                 <Route path={'/profile'} component={Profile}/>
-            </Switch>
+            {/*</Switch>*/}
         </div>
         <Footer/>
     </div>
 }
 
-const mapStateToProps= createStructuredSelector({
+const mapStateToProps = createStructuredSelector({
     user: selectUser
 })
 
-const mapDispatchToProps= dispatch => ({
+const mapDispatchToProps = dispatch => ({
     isLoggedIn: () => dispatch(GetUserFromCookieStart())
 })
 
