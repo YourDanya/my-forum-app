@@ -1,6 +1,6 @@
-const mongoose=require('mongoose');
-const slugify= require('slugify');
-const validator= require('validator');
+const mongoose=require('mongoose')
+const slugify= require('slugify')
+const validator= require('validator')
 const User= require('./userModel')
 const Thread=require('./threadModel')
 
@@ -65,9 +65,9 @@ postSchema.pre(/^find/, function(next) {
     }).populate({
         path: 'reply',
         select: 'post'
-    });
-    next();
-});
+    })
+    next()
+})
 
 const Post= mongoose.model('Post', postSchema)
 module.exports= Post

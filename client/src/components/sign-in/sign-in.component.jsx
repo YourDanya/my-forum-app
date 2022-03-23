@@ -1,12 +1,14 @@
-import React, {useState} from "react"
+import React, {useEffect, useState} from "react"
 import {connect} from "react-redux";
 
 import './sign-in.styles.sass'
 import {AiFillEye, AiFillEyeInvisible, AiOutlineLock, HiOutlineMail} from "react-icons/all";
-import {SignInStart} from "../../redux/user/user.actions";
+import {ClearSuccessMessages, SignInStart} from "../../redux/user/user.actions";
+import {createStructuredSelector} from "reselect";
+import {selectErrorMessages, selectSuccessMessages} from "../../redux/user/user.selector";
 
 
-const SignIn= ({signIn})=>{
+const SignIn= ({signIn, successMessages, errorMessages, clearSuccessMessages})=>{
     const [signInData, setSignInData]= useState({email:'', password:''})
     const {email, password}= signInData
     const [eye, setEye]= useState(true)
@@ -21,20 +23,25 @@ const SignIn= ({signIn})=>{
         signIn(signInData)
     }
 
-    const onFocus = (event) => {
-        event.target.parentElement.querySelectorAll('svg')
-            .forEach(elem => elem.style.color='#9c0068')
-    }
-
     const onBlur = (event) => {
         const elements=event.target.parentElement.querySelectorAll('svg')
         elements[0].style.color='rgb(194,194,194)'
         if (elements.length>1) elements[1].style.color='rgb(129,129,129)'
     }
 
+    const onFocus = (event) => {
+        event.target.parentElement.querySelectorAll('svg')
+            .forEach(elem => elem.style.color='#9c0068')
+    }
+
     const onEye= () =>{
         setEye(!eye)
     }
+
+    useEffect(() => {
+        if(Object.keys(successMessages).length===0) return
+        clearSuccessMessages()
+    }, [successMessages])
 
     return <div className={'sign-in'}>
         <form onSubmit={handleSubmit}>
@@ -52,7 +59,6 @@ const SignIn= ({signIn})=>{
                     required
                 />
             </div>
-
             <div className={'input-container'}>
                 <AiOutlineLock/>
                 <input
@@ -65,8 +71,17 @@ const SignIn= ({signIn})=>{
                     placeholder={'Пароль'}
                     required
                 />
-
                 {eye? <AiFillEyeInvisible onClick={()=> setEye(!eye)}/> : <AiFillEye onClick={onEye}/>}
+            </div>
+            <div className={'input-message'}>
+                {successMessages.login ?
+                    <span className={'input-message-success'}>successMessages.login?</span>
+                    : errorMessages.login ?
+                        <span className={'input-message-error'}>
+                            {errorMessages.login}
+                        </span>
+                        : ''
+                }
             </div>
             <button type={'submit'} >Войти</button>
         </form>
@@ -74,7 +89,13 @@ const SignIn= ({signIn})=>{
 }
 
 const mapDispatchToProps= dispatch => ({
-    signIn: data => dispatch(SignInStart(data))
+    signIn: data => dispatch(SignInStart(data)),
+    clearSuccessMessages: () => dispatch(ClearSuccessMessages())
 })
 
-export default connect(null, mapDispatchToProps)(SignIn)
+const mapStateToProps= createStructuredSelector({
+    successMessages: selectSuccessMessages,
+    errorMessages: selectErrorMessages,
+})
+
+export default connect(mapStateToProps, mapDispatchToProps)(SignIn)

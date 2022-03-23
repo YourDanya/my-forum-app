@@ -1,5 +1,7 @@
 .modal
   display: flex
+  visibility: hidden
+  opacity: 0
   left: 0
   top: 0
   position: fixed
@@ -9,9 +11,14 @@
   background-color: rgba(51,51,51,.6)
   justify-content: center
   align-items: center
-  transform: scale(0)
-  transition: 0.5s all
+  transition: 0.7s all
   &-form
+    position: fixed
+    left: 50%
+    top: 50%
+    transform: translateY(-50%) translateX(-200vw)
+    transition: 0.7s all
+    z-index: 200
     border-radius: 2px
     min-height: 420px
     width: 650px
@@ -39,7 +46,6 @@
       width: 100%
       height: 45px
       border: none
-      margin-bottom: 5px
       outline-color: #9ec1ea
       font-size: 16px
       padding-left: 10px
@@ -51,7 +57,7 @@
       font-family: inherit
       font-size: 16px
       padding: 10px
-      margin-top: 10px
+      margin-top: 13px
       resize: none
       width: 100%
       height: 150px
@@ -71,13 +77,14 @@
           font-weight: 400
           font-size: 14px
     &-button
-      font-weight: 500
+      font-weight: 600
       cursor: pointer
       color: white
       border: none
-      background-color: #be007f
+      background-color: #d50e82
       width: 140px
       height: 40px
+      border-radius: 1px
       font-size: 16px
     &-footer
       margin-top: 20px
@@ -88,8 +95,64 @@
       margin-top: 5px
       color: #ff0000
 .active
-  transform: scale(1)
+  visibility: visible
+  opacity: 1
+.formActive
+  transform: translateY(-50%) translateX(-50%)
 
+@media (max-width: 768px)
+  .modal
+    &-form
+      width: 90vw
+      &-title
+        font-size: 17px
+      &-footer
+        margin-top: 15px
+      &-cross
+        font-size: 19px
+      &-button
+        width: 130px
+        font-size: 15px
+      &-author
+        display: flex
+        align-items: center
+        margin-top: 10px
+        &-img
+          height: 55px
+        &-name
+          font-size: 15px
+      &-input
+        height: 42px
+        font-size: 15px
+      &-text
+        font-size: 15px
 
-
-
+@media (max-width: 576px)
+  .modal
+    &-form
+      min-height: 300px
+      &-nav
+        padding: 13px
+      &-content
+        padding: 15px 12px
+      &-title
+        font-size: 15px
+      &-cross
+        font-size: 18px
+      &-footer
+        margin-top: 12px
+      &-button
+        height: 35px
+        font-size: 14px
+      &-author
+        margin-top: 2px
+        &-img
+          height: 50px
+        &-name
+          font-size: 14px
+      &-input
+        height: 40px
+        font-size: 14px
+      &-text
+        margin-top: 11px
+        font-size: 14px

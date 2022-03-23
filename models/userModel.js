@@ -8,7 +8,9 @@ const userSchema=new mongoose.Schema({
   name: {
     type: String,
     required: [true, `должно быть имя`],
-    trim: true
+    trim: true,
+    maxlength: [15, 'Имя пользователя должно состоять из 15 или менее символов.'],
+    minlength: [4, 'Имя пользователя должно состоять из 4 или более символов.']
   },
   myThreads: [
     {
@@ -63,17 +65,17 @@ const userSchema=new mongoose.Schema({
     minlength: 6,
     select: false
   },
-  passwordConfirm: {
-    type: String,
-    required: [true, 'Должно быть подтверждение пароля'],
-    validate: {
-      // this only works on create or save
-      validator: function(el) {
-        return el ===this.password
-      },
-      message: 'passwords are not the same'
-    }
-  },
+  // passwordConfirm: {
+  //   type: String,
+  //   required: [true, 'Должно быть подтверждение пароля'],
+  //   validate: {
+  //     // this only works on create or save
+  //     validator: function(el) {
+  //       return el ===this.password
+  //     },
+  //     message: 'passwords are not the same'
+  //   }
+  // },
   passwordChangedAt: {
     type: Date
   },
@@ -82,6 +84,21 @@ const userSchema=new mongoose.Schema({
   },
   passwordResetExpires: {
     type: Date
+  },
+  emailConfirmToken: {
+    type: String
+  },
+  emailConfirmExpires: {
+    type: Date
+  },
+  emailConfirmed: {
+    type: Boolean
+  },
+  emailToConfirm: {
+    type: String
+  },
+  lastUpdate: {
+    type: Boolean
   },
   active: {
     type: Boolean,
@@ -92,10 +109,8 @@ const userSchema=new mongoose.Schema({
 
 userSchema.pre('save', async function(next) {
   if (!this.isModified('password')) return next();
-
   this.password = await bcrypt.hash(this.password, 12);
-
-  this.passwordConfirm = undefined;
+  // this.passwordConfirm = undefined;
   next();
 });
 

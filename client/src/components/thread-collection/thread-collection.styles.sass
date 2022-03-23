@@ -1,28 +1,57 @@
 .threads
-  margin-bottom: 30px
-  padding: 10px
+  padding:  0 15px
   position: relative
   margin-top: 20px
-  border-radius: 3px
+  margin-bottom: 80px
+  border-radius: 5px
   background-color: white
-  min-height: 520px
+  min-height: 960px
   width: 70%
   border: 1px solid rgb(212, 228, 247)
+  &-collection
+    position: sticky
 .add-thread-cover
   position: absolute
-  right: 20px
-  bottom: 13px
+  right: 10px
+  bottom: 10px
   .add-thread-button
-    height: 34px
-    width: 150px
+    border-radius: 20px
+    height: 35px
+    width: 120px
     font-size: 15px
     display: flex
     align-items: center
     justify-content: center
     color: white
-    background-color: #4cabe9
+    background-color: black
     border: none
     cursor: pointer
     svg
       margin-right: 2px
       font-size: 22px
+
+@media (max-width: 992px)
+  .threads
+    margin: 10px 0 100px
+
+@media (max-width: 768px)
+  .threads
+    padding: 0 10px
+    margin-top: 10px
+    order: 2
+    width: 99%
+
+@media (max-width: 576px)
+  .threads
+    border: none
+    background-color: #eef1f4
+    padding: 0
+    margin: 10px 0 120px
+  .add-thread-cover
+    position: absolute
+    right: 50%
+    transform: translateX(50%)
+    bottom: -80px
+    .add-thread-button
+      height: 30px
+      font-size: 13px

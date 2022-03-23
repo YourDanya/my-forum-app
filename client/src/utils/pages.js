@@ -1,9 +1,9 @@
-export const pageCalc = (arr, currentPage) =>{
-    const pagesCount=Math.ceil(arr.length/10)
+export const pageCalc = (arr, currentPage, itemsOnPageCount=10) =>{
+    const pagesCount=Math.ceil(arr.length/itemsOnPageCount)
     const itemsOnPage=[]
 
-    const start= (currentPage-1)*10
-    const end= arr.length>currentPage*10? currentPage*10: arr.length
+    const start= (currentPage-1)*itemsOnPageCount
+    const end= arr.length>currentPage*itemsOnPageCount? currentPage*itemsOnPageCount: arr.length
 
     for(let i=start; i<end; i++) {
         itemsOnPage.push(arr[i])

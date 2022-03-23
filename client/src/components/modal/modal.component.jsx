@@ -21,7 +21,6 @@ const Modal = ({
 
     useEffect(() => setTextValue(text), [text])
 
-
     const handleTextChange = event => {
         setTextValue(event.target.value)
     }
@@ -56,90 +55,85 @@ const Modal = ({
             })
     }
 
-
-    return <div className={`modal ${isActive ? 'active' : ''}`} onClick={() => {
-        setActive(false)
-        setTextValue(text)
-    }}>
-
-        <form className={'modal-form'} onClick={event => event.stopPropagation()} onSubmit={handleSubmit}>
-            <div className={'modal-form-nav'}>
-                <div className={'modal-form-title'}>
-                    Добавить {isPost ? 'ответ' : 'тему'}
-                </div>
-
-                <div className={'modal-form-cross'} onClick={() => setActive(false)}>
-                    <ImCross/>
-                </div>
+    return (
+        <>
+            <div className={`modal ${isActive ? 'active' : ''}`} onClick={event => {
+                setActive(false)
+                setTextValue(text)
+            }}>
             </div>
-
-            <div className={'modal-form-content'}>
-
-                {
-                    reply ?
-                        <PostReply {...reply}
+            <form className={`modal-form ${isActive? 'formActive' : ''}`} onSubmit={handleSubmit}>
+                <div className={'modal-form-nav'}>
+                    <div className={'modal-form-title'}>
+                        Добавить {isPost ? 'ответ' : 'тему'}
+                    </div>
+                    <div className={'modal-form-cross'} onClick={() => setActive(false)}>
+                        <ImCross/>
+                    </div>
+                </div>
+                <div className={'modal-form-content'}>
+                    {
+                        reply ?
+                            <PostReply {...reply}
                                        styles={{
                                            marginBottom: '10px'
                                        }}
-                        /> : null
-                }
+                            /> : null
+                    }
+                    {
+                        isPost ?
+                            <div className={'modal-form-label'}>
+                                {threadName}
+                            </div> :
+                            <input
+                                className={'modal-form-input'}
+                                value={inputValue}
+                                onChange={handleInputValue}
+                                placeholder={'Название темы'}
+                                required
+                            />
 
-                {
-                    isPost ?
-                        <div className={'modal-form-label'}>
-                            {threadName}
-                        </div> :
-                        <input
-                            className={'modal-form-input'}
-                            value={inputValue}
-                            onChange={handleInputValue}
-                            placeholder={'Название темы'}
-                            required
-                        />
-
-                }
-
-                <textarea className={'modal-form-text'}
-                          value={textValue}
-                          onChange={handleTextChange}
-                          placeholder={isPost ? 'Текст ответа' : 'Текст темы'}
-                          required
-                />
-
-                <div className={'modal-form-author'}>
-                    <img className={'modal-form-author-img'} src={imgUrl} alt={'post author'}/>
-                    <div className={'modal-form-author-name'}>
-                        Автор <br/>
-                        <span>
-                            {authorName}
-                        </span>
+                    }
+                    <textarea className={'modal-form-text'}
+                              value={textValue}
+                              onChange={handleTextChange}
+                              placeholder={isPost ? 'Текст ответа' : 'Текст темы'}
+                              required
+                    />
+                    <div className={'modal-form-author'}>
+                        <img className={'modal-form-author-img'} src={imgUrl} alt={'post author'}/>
+                        <div className={'modal-form-author-name'}>
+                            Автор <br/>
+                            <span>
+                        {authorName}
+                    </span>
+                        </div>
+                    </div>
+                    <div className={'modal-form-footer'}>
+                        {
+                            isUploading ?
+                                <Spinner overlayStyles={{
+                                    height: '40px',
+                                    width: '40px',
+                                    marginLeft: '8.28px'
+                                }} containerStyles={{
+                                    height: '40px',
+                                    width: '40px'
+                                }}/> :
+                                uploadMessage ? uploadMessage :
+                                    <button
+                                        className={'modal-form-button'}>Добавить {isPost ? 'ответ' : 'тему'}</button>
+                        }
+                        {
+                            errorMessage ? <div className={'modal-form-error'}>
+                                {errorMessage}
+                            </div> : null
+                        }
                     </div>
                 </div>
-
-                <div className={'modal-form-footer'}>
-                    {
-                        isUploading ?
-                            <Spinner overlayStyles={{
-                                height: '40px',
-                                width: '40px',
-                                marginLeft: '8.28px'
-                            }} containerStyles={{
-                                height: '40px',
-                                width: '40px'
-                            }}/> :
-                            uploadMessage ? uploadMessage :
-                                <button className={'modal-form-button'}>Добавить {isPost ? 'ответ' : 'тему'}</button>
-                    }
-                    {
-                        errorMessage ? <div className={'modal-form-error'}>
-                            {errorMessage}
-                        </div> : null
-                    }
-                </div>
-
-            </div>
-        </form>
-    </div>
+            </form>
+        </>
+    )
 }
 
 const mapDispatchToProps = dispatch => ({

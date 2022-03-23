@@ -30,6 +30,44 @@
       color: black
       font-size: 20px
     &-text
+      line-height: 13px
       margin-left: 5px
       cursor: pointer
       color: black
+
+@media (max-width: 992px)
+  .menu
+    width: calc(30% - 10px)
+    margin: 10px 0 0 10px
+    &-items
+      padding: 10px
+    &-item
+      font-size: 15px
+      svg
+        font-size: 18px
+
+@media (max-width: 768px)
+  .menu
+    top: -1px
+    margin: 20px 0 0 0
+    order: 1
+    width: 100%
+    &-items
+      padding: 5px 10px
+      flex-direction: row
+      justify-content: space-between
+    &-item
+      width: auto
+      border: none
+
+@media (max-width: 576px)
+  .menu
+    height: 50px
+    border-radius: 5px
+    &-items
+      padding: 0 10px
+    &-item
+      svg
+        font-size: 25px
+      &-text
+        display: none

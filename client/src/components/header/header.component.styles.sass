@@ -1,25 +1,22 @@
-$medium: 1000px
-$presmall: 772px
-$small: 500px
-
 @font-face
-  font-family: 'AnotherDangerFont'
-  src: url(./../../assets/AnotherDangerFont.ttf) format('truetype')
+  font-family: 'AnotherDanger'
+  src: url(../../assets/fonts/AnotherDange.ttf) format('truetype')
 
 .header
   background-color: #ffffff
   height: 150px
   display: flex
   align-items: center
-  border-radius: 10px
+  border-radius: 5px
   border: 1px solid rgb(212, 228, 247)
+  width: 100%
   .logo
     width: 9%
   .forum-name
     cursor: pointer
-    width: 40%
+    width: 45%
     padding-left: 2%
-    font-family: 'AnotherDangerFont', sans-serif
+    font-family: 'AnotherDanger', sans-serif
     font-size: 4.5vw
   .sign-in-up
     width: 20%
@@ -28,8 +25,8 @@ $small: 500px
     align-items: center
     .sign-container
       margin: 1%
-      height: 30px
-      width: 110px
+      height: 33px
+      width: 120px
       border-radius: 100px
       display: flex
       justify-content: center
@@ -38,11 +35,11 @@ $small: 500px
       font-weight: 900
       font-size: 16px
     .sign-in
-      background-color: rgb(156,0,104)
+      background-color: #d50e82
       color: white
     .sign-up
-      border: 2px solid rgb(156,0,104)
-      color: rgb(156,0,104)
+      border: 2px solid #d50e82
+      color: #d50e82
 
   .entered-user
     display: flex
@@ -61,7 +58,11 @@ $small: 500px
         color: #7b92ad
         font-size: 14px
 
-@media screen and (max-width: $medium)
+@media (max-width: 1200px)
+  .header
+    height: 120px
+
+@media (max-width: 992px)
   .header
     height: 100px
     .forum-name
@@ -69,7 +70,7 @@ $small: 500px
     .entered-user
       width: 34%
 
-@media screen and (max-width: $presmall)
+@media (max-width: 768px)
   .header
     height: 200px
     display: flex
@@ -89,7 +90,7 @@ $small: 500px
     .sign-in-up
       width: 48%
 
-@media screen and (max-width: $small)
+@media (max-width: 576px)
   .header
     .logo
       width: 80px

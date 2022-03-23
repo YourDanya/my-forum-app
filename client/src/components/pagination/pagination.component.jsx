@@ -1,7 +1,7 @@
 import React from 'react'
 import './pagination.styles.sass'
 
-const Pagination= ({currentPage, setPage, pagesCount, styles}) => {
+const Pagination= ({currentPage, setPage, pagesCount, styles, className}) => {
     if(pagesCount===1){
         return null
     }
@@ -66,7 +66,7 @@ const Pagination= ({currentPage, setPage, pagesCount, styles}) => {
         }
     }
 
-    return <div className={'pagination'} style={styles}>
+    return <div className={`pagination ${className}`} style={styles}>
         {
             arr.map((elem, idx) =>
                 <div key={idx} className={'elem '+setClass(elem)} onClick={()=>onClick(elem)}>{elem}</div>

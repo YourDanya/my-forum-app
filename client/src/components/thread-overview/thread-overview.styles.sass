@@ -1,16 +1,55 @@
 .thread-overview
   height: 45px
-  width: 97%
+  width: 100%
   margin: 0 auto
   display: flex
   justify-content: space-between
   align-items: center
   border-bottom: 1px solid #d4e4f7
   cursor: pointer
+  position: relative
   .thread-name
+    line-height: 15px
     &:hover
       color: #9c0068
   .thread-posts-count
-    white-space: nowrap
+    margin-left: 3px
+    white-space: pre
     font-size: 12px
     color: #7b92ad
+    .threads-posts-link
+      display: none
+
+@media (max-width: 992px)
+  .thread-overview
+    .thread-name
+      font-size: 15px
+    .thread-posts-count
+      font-size: 11px
+
+@media (max-width: 576px)
+  .thread-overview
+    background-color: white
+    padding: 10px
+    width: 100%
+    height: unset
+    min-height: 50px
+    border: 1px solid #d4e4f7
+    margin: 10px 0
+    border-radius: 5px
+    flex-direction: column
+    align-items: flex-start
+    .thread-name
+      margin-bottom: 15px
+      width: 85%
+      font-weight: 500
+      font-size: 14px
+    .thread-posts-count
+      width: 100%
+      display: flex
+      justify-content: space-between
+      .threads-posts-link
+        display: block
+        font-weight: 500
+        font-size: 13px
+        color: #d50e82

@@ -16,3 +16,23 @@ export const selectUserId = createSelector(
     [selectUser],
     user => user._id
 )
+
+export const selectSuccessMessages = createSelector(
+    [selectUserStore],
+    userStore => userStore.successMessages
+)
+
+export const selectErrorMessages = createSelector(
+    [selectUserStore],
+    userStore => userStore.errorMessages
+)
+
+export const selectUpdating = createSelector(
+    [selectUserStore],
+    userStore => userStore.updating
+)
+
+export const selectToken = createSelector(
+    [selectUserStore],
+    userStore => userStore.token
+)

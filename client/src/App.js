@@ -16,14 +16,13 @@ import {selectUser} from "./redux/user/user.selector";
 import {connect} from "react-redux";
 import {GetUserFromCookieStart} from "./redux/user/user.actions";
 import Menu from "./components/menu/menu.component";
+import TokenComponent from "./components/token/token.component";
 
 const App = ({user, isLoggedIn}) => {
 
-    useEffect(() => {
+    useEffect(async () => {
         isLoggedIn()
     }, [])
-
-    console.log(user)
 
     return <div className={'App'}>
         <div className={'App-content'}>
@@ -40,6 +39,7 @@ const App = ({user, isLoggedIn}) => {
                 <Route path={["/", "/threads/:threadId"]}  exact component={Menu}/>
                 <Route path={'/sign-up'} component={SignUp}/>
                 <Route path={'/profile'} component={Profile}/>
+                <Route path={['/confirm-email/:token', '/reset-password/:'] } exact component={TokenComponent}/>
             {/*</Switch>*/}
         </div>
         <Footer/>
@@ -47,7 +47,7 @@ const App = ({user, isLoggedIn}) => {
 }
 
 const mapStateToProps = createStructuredSelector({
-    user: selectUser
+    user: selectUser,
 })
 
 const mapDispatchToProps = dispatch => ({

@@ -5,10 +5,9 @@ import defaultUser from '../../assets/avatars/avatar1.png'
 import {withRouter} from "react-router-dom";
 import {connect} from "react-redux";
 import {SignOutStart} from "../../redux/user/user.actions";
-import {createStructuredSelector} from "reselect";
-import {selectUserName} from "../../redux/user/user.selector";
 
 const Header = ({history, user, signOut}) => {
+
     return <div className={'header'}>
         <img src={pathLogo} alt={'logo'} className={'logo'}/>
         <div className={'forum-name'} onClick={() => history.push('/')}>Danya FORUM</div>
@@ -20,7 +19,6 @@ const Header = ({history, user, signOut}) => {
                 }
             </span></div>
         </div>
-
         {
             user ?
                 <div className={'sign-in-up'}>
@@ -31,7 +29,6 @@ const Header = ({history, user, signOut}) => {
                     <div className={'sign-container sign-in'} onClick={() => history.push('/sign-in')}>Вход</div>
                 </div>
         }
-
     </div>
 }
 

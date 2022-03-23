@@ -36,7 +36,6 @@ const SignUp= ()=>{
         if (elements.length>1) elements[1].style.color='rgb(129,129,129)'
     }
 
-
     return <div className={'sign-in sign-up'}>
         <form onSubmit={handleSubmit}>
             <div className={'title'}>РЕГИСТРАЦИЯ</div>
@@ -53,7 +52,6 @@ const SignUp= ()=>{
                     required
                 />
             </div>
-
             <div className={'input-container'} >
                 <HiOutlineMail/>
                 <input
@@ -67,7 +65,6 @@ const SignUp= ()=>{
                     required
                 />
             </div>
-
             <div className={'input-container'}>
                 <AiOutlineLock/>
                 <input
@@ -80,11 +77,9 @@ const SignUp= ()=>{
                     placeholder={'Пароль'}
                     required
                 />
-
                 {eye.one? <AiFillEyeInvisible onClick={()=> setEye({...eye, one: !eye.one})}/>
                 : <AiFillEye onClick={()=> setEye({...eye, one: !eye.one})}/>}
             </div>
-
             <div className={'input-container'}>
                 <GiConfirmed/>
                 <input
@@ -97,12 +92,9 @@ const SignUp= ()=>{
                     placeholder={'Подтверждение пароля'}
                     required
                 />
-
                 {eye.two? <AiFillEyeInvisible onClick={()=> setEye({...eye, two: !eye.two})}/>
                 : <AiFillEye onClick={()=> setEye({...eye, two: !eye.two})}/>}
-
             </div>
-
             <button type={'submit'} >Регистрация</button>
         </form>
     </div>

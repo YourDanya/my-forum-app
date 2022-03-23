@@ -1,39 +1,135 @@
 .profile
-  padding: 20px
+  margin-top: 20px
   display: flex
-  flex-wrap: wrap
+  flex-wrap: nowrap
   width: 100%
-  min-height: 595px
+  min-height: inherit
   &-sidebar
-    width: 30%
+    border-radius: 5px 0 0 5px
+    width: 250px
     background: #181c2c
     padding-top: 30px
     &-links
       position: sticky
-      top: 30px
+      top: 20px
+    &-hamburger
+      display: none
     &-link
+      text-decoration: none
       padding-left: 30px
       display: flex
       align-items: center
       margin-bottom: 15px
-      font-weight: 300
-      font-size: 16px
+      font-weight: 500
       color: white
       cursor: pointer
-      transition: all 0.8s
+      transition: all 0.6s
       svg
         color: #1caac9
         margin-right: 5px
         font-size: 22px
       &:hover
-        padding-left: 60px
+        padding-left: 50px
     .select
-        border-left: 5px solid white
-        padding-left: 25px
-        &:hover
-          padding-left: 30px
+        //border-left: 5px solid white
+        //padding-left: 25px
+        //&:hover
+        //  padding-left: 30px
   &-main
-    width: 70%
+    border-radius: 0 5px 5px 0
+    width: calc(100% - 200px)
     display: flex
     justify-content: center
     background-color: white
+.settings
+  &-form
+    width: 300px
+
+@media (max-width: 992px)
+  .profile
+    &-sidebar
+      width: 200px
+      &-link
+        padding-left: 20px
+        &:hover
+          padding-left: 40px
+    &-main
+      width: calc(100% - 200px)
+
+
+@media (max-width: 772px)
+  .profile
+    &-sidebar
+      width: 180px
+      &-link
+        padding-left: 15px
+        svg
+          font-size: 20px
+        &:hover
+          padding-left: 15px
+    &-main
+      width: calc(100% - 180px)
+
+@media (max-width: 576px)
+  .profile
+    padding: 20px 0
+    flex-wrap: nowrap
+    overflow: clip
+    &-sidebar
+      padding: 0
+      width: 50px
+      display: flex
+      position: relative
+      &-overlay
+        top: 0
+        position: sticky
+        padding-top: 10px
+      &-links
+        position: absolute
+        left: 50px
+        top: 0
+        background-color: #181c2c
+        width: 200px
+        height: 100%
+      &_link
+      //  &:first-child
+      //    padding-top: 20px
+      .hamburger
+        cursor: pointer
+        z-index: 200
+        top: 15px
+        margin-top: 15px
+        position: sticky
+        display: flex
+        width: 100%
+        flex-direction: column
+        justify-content: space-between
+        align-items: center
+        height: 15px
+        &-line
+          background-color: white
+          transition: 0.6s all
+          width: 35px
+          height: 1px
+    &-main
+      z-index: 200
+      transition: 0.5s all
+      width: calc(100% - 50px)
+  .active
+    .profile-sidebar
+      &-links
+        left: 50px
+      .hamburger
+        display: flex
+        &-line
+          &:nth-child(1)
+            transform: translateY(7px) rotate(-45deg)
+          &:nth-child(2)
+            display: none
+          &:nth-child(3)
+            transform: translateY(-7px) rotate(45deg)
+    .profile-main
+      transform: translateX(200px)
+
+
+

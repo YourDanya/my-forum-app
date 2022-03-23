@@ -2,19 +2,41 @@
   position: relative
   z-index: 0
   background-color: #212529
-  height: 80px
+  height: 85px
   width: 100%
-
-  &Socials
+  margin-top: 50px
+  &-socials
     display: flex
     align-items: center
     justify-content: space-around
-    height: 80px
+    height: 85px
     div
       color: white
       font-size: 40px
-  &Copyright
+  &-copyright
+    font-size: 15px
     color: white
     position: absolute
     bottom: 4px
     right: 4px
+
+@media (max-width: 768px)
+  .footer
+    height: 80px
+    &-socials
+      height: 80px
+      div
+        font-size: 35px
+    &-copyright
+      font-size: 14px
+
+@media (max-width: 576px)
+  .footer
+    height: 75px
+    &-socials
+      height: 75px
+      div
+        font-size: 30px
+    &-copyright
+      font-size: 13px
+

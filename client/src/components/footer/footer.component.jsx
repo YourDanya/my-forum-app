@@ -5,8 +5,7 @@ import {FaFacebook, FaTelegram, FaViber, FiInstagram, IoLogoWhatsapp} from "reac
 
 const Footer= () =>{
     return <div className={'footer'}>
-        <div className={'container'}>
-            <div className={'footerSocials'}>
+            <div className={'footer-socials'}>
                 <div>
                     <FaFacebook/>
                 </div>
@@ -23,10 +22,8 @@ const Footer= () =>{
                     <IoLogoWhatsapp/>
                 </div>
             </div>
-            <div className={'footerCopyright'}>© Danya FORUM. COPYRIGHT</div>
-        </div>
+            <div className={'footer-copyright'}>© Danya FORUM. COPYRIGHT</div>
     </div>
 }
-
 
 export default Footer

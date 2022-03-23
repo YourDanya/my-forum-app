@@ -41,15 +41,67 @@ export const GetUserFromCookieFailure= message =>({
 })
 
 
-export const UpdateUserPasswordStart= data =>({
-    type: UserActionTypes.UPDATE_USER_PASSWORD_START,
+export const UpdateUserDataStart= data =>({
+    type: UserActionTypes.UPDATE_USER_DATA_START,
     payload: data
 })
-export const UpdateUserPasswordSuccess= user =>({
-    type: UserActionTypes.UPDATE_USER_PASSWORD_SUCCESS,
-    payload: user
-})
-export const UpdateUserPasswordFailure= message =>({
-    type: UserActionTypes.UPDATE_USER_NAME_FAILURE,
+export const UpdateUserDataSuccess= message =>({
+    type: UserActionTypes.UPDATE_USER_DATA_SUCCESS,
     payload: message
 })
+export const UpdateUserDataFailure= message =>({
+    type: UserActionTypes.UPDATE_USER_DATA_FAILURE,
+    payload: message
+})
+
+
+export const ForgetUserPasswordStart= data =>({
+    type: UserActionTypes.FORGOT_USER_PASSWORD_START,
+    payload: data
+})
+export const ForgetUserPasswordSuccess= message =>({
+    type: UserActionTypes.FORGOT_USER_PASSWORD_SUCCESS,
+    payload: message
+})
+export const ForgetUserPasswordFailure= message =>({
+    type: UserActionTypes.FORGOT_USER_PASSWORD_FAILURE,
+    payload: message
+})
+
+
+export const ResetUserPasswordStart= data =>({
+    type: UserActionTypes.RESET_USER_PASSWORD_START,
+    payload: data
+})
+export const ResetUserPasswordSuccess= message =>({
+    type: UserActionTypes.RESET_USER_PASSWORD_SUCCESS,
+    payload: message
+})
+export const ResetUserPasswordFailure= message =>({
+    type: UserActionTypes.RESET_USER_PASSWORD_FAILURE,
+    payload: message
+})
+
+export const ClearSuccessMessages = () =>({
+    type: UserActionTypes.CLEAR_SUCCESS_MESSAGES,
+})
+export const ClearErrorMessages = () =>({
+    type: UserActionTypes.CLEAR_ERROR_MESSAGES,
+})
+
+export const SendTokenStart = data => ({
+    type: UserActionTypes.SEND_TOKEN_START,
+    payload: data
+})
+export const SendTokenSuccess = data => ({
+    type: UserActionTypes.SEND_TOKEN_SUCCESS,
+    payload: data
+})
+export const SendTokenFailure = data => ({
+    type: UserActionTypes.SEND_TOKEN_FAILURE,
+    payload: data
+})
+export const CLearToken = () => ({
+    type: UserActionTypes.CLEAR_TOKEN
+})
+

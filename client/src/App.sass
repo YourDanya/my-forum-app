@@ -3,6 +3,7 @@
   flex-direction: column
   align-items: center
   &-content
+    align-content: flex-start
     min-height: calc(100vh - 80px)
     display: flex
     align-items: stretch
@@ -10,11 +11,19 @@
     padding-top: 30px
     width: 70%
 
-@media (max-width: 1000px)
+@media (max-width: 1200px)
   .App-content
     width: 80%
 
-@media (max-width: 772px)
+@media (max-width: 992px)
+  .App-content
+    width: 85%
+
+@media (max-width: 768px)
   .App-content
     width: 90%
+    justify-content: center
 
+@media (max-width: 576px)
+  .App-content
+    width: 96%

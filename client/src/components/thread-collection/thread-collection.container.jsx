@@ -17,11 +17,11 @@ const ThreadCollectionContainer= ({threads}) =>{
     const [currentPage, setPage]=useState(1)
 
     if(!threads) {
-        return <Spinner overlayStyles={{width: '70%'}}/>
+        return <Spinner overlayStyles={{width: '70%', order: '2'}}/>
     }
 
     else {
-        const {pagesCount, itemsOnPage} = pageCalc(threads, currentPage)
+        const {pagesCount, itemsOnPage} = pageCalc(threads, currentPage, 20)
         return (
             <>
                 <ThreadCollection
@@ -33,7 +33,6 @@ const ThreadCollectionContainer= ({threads}) =>{
             </>
         )
     }
-
 }
 
 const mapStateToProps=createStructuredSelector({
