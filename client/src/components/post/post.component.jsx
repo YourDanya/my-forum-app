@@ -17,7 +17,7 @@ const Post = ({
     const name= author.name
     const userId = author.id
 
-    return <div className={'threads post'}>
+    return <div className={'post'}>
 
         <div className={'post-author'}>
             <img className={'img'} src={avatar} alt={'avatar'}/>

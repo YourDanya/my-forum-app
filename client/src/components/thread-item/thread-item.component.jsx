@@ -18,8 +18,6 @@ const ThreadItem = (
         userId
     }) => {
 
-    console.log('inside thread item component')
-
     const [isModalActive, setModalActive] = useState(false)
 
     const [textValue, setTextValue] = useState('')
@@ -38,10 +36,7 @@ const ThreadItem = (
 
     const [sticky, setSticky] = useState(false)
 
-    console.log(author)
-
     useEffect(() => {
-
         if (pagesCount > 1) {
             const cachedRef = ref.current
             const observer = new IntersectionObserver(
@@ -54,7 +49,7 @@ const ThreadItem = (
                 },
                 {
                     threshold: 0,
-                    rootMargin: `0px 0px -${window.innerHeight-1}px 0px`
+                    rootMargin: `0px 0px -${window.innerHeight - 1}px 0px`
                 }
             )
 
@@ -62,96 +57,90 @@ const ThreadItem = (
 
             return () => observer.unobserve(cachedRef)
         }
-
     }, [pagesCount])
 
-    return <div className={'main'}>
-
-        <div className={'threads item'}>
-            <div className={'name'}>{name}</div>
-            <div className={'description'}>{description}</div>
-            <div className={'date'}>{dateFormat(createdAt)}</div>
-            <div className={'info'}>
-
-                <div className={'author'}>
-                    <img src={avatarPath} alt={'avatar'}/>
-                    <div className={'author-name'}><span>Автор</span> <br/> {author.name}</div>
-                </div>
-
-                <LikesDislikes
-                    likes={likes}
-                    dislikes={dislikes}
-                    userId={userId}
-                    threadId={id}
-                />
-
-                <div className={'reply'}>
-                    <div className={'reply-title'}>
-                        Оставьте свой ответ
+    return (
+        <div className={'main'}>
+            <div className={' item'}>
+                <div className={'name'}>{name}</div>
+                <div className={'description'}>{description}</div>
+                <div className={'date'}>{dateFormat(createdAt)}</div>
+                <div className={'info'}>
+                    <div className={'author'}>
+                        <img src={avatarPath} alt={'avatar'}/>
+                        <div className={'author-name'}><span>Автор</span> <br/> {author.name}</div>
                     </div>
-                    <textarea placeholder="Ваш ответ автору"
-                              value={textValue}
-                              onChange={event => setTextValue(event.target.value)}
+                    <LikesDislikes
+                        likes={likes}
+                        dislikes={dislikes}
+                        userId={userId}
+                        threadId={id}
                     />
-                    <div className={'reply-button'} onClick={() => handleModal()}>
-                        Ответить
+                    <div className={'reply'}>
+                        <div className={'reply-title'}>
+                            Оставьте свой ответ
+                        </div>
+                        <textarea placeholder="Ваш ответ автору"
+                                  value={textValue}
+                                  onChange={event => setTextValue(event.target.value)}
+                        />
+                        <div className={'reply-button'} onClick={() => handleModal()}>
+                            Ответить
+                        </div>
                     </div>
                 </div>
+                {
+                    posts.length > 1 ?
+                        <div className={'replies'}>
+                            <div className={'replies-wrapper'}>
+                                <div className={'replies-count'}>
+                                    ответов {posts.length}
+                                </div>
+                                <div className={'replies-last'}>
+                                    Последний - {dateFormat(posts[posts.length - 1].createdAt)}
+                                </div>
+                            </div>
+                        </div> : null
+                }
+            </div>
+            <div className={'posts'} ref={ref}>
+                {
+                    itemsOnPage.map((post) =>
+
+                        <Post
+                            {...post}
+                            key={post.number}
+                            handleModal={handleModal}
+                            threadId={id}
+                            userId
+                        />
+                    )
+                }
             </div>
             {
-                posts.length > 1 ?
-                    <div className={'replies'}>
-                        <div className={'replies-wrapper'}>
-                            <div className={'replies-count'}>
-                                ответов {posts.length}
-                            </div>
-                            <div className={'replies-last'}>
-                                Последний - {dateFormat(posts[posts.length - 1].createdAt)}
-                            </div>
-                        </div>
-                    </div> : null
-            }
-        </div>
-
-        <div className={'posts'} ref={ref}>
-            {
-                itemsOnPage.map((post) =>
-
-                    <Post
-                        {...post}
-                        key={post.number}
-                        handleModal={handleModal}
-                        threadId={id}
-                        userId
-                    />
-                )
-            }
-        </div>
-
-        {
-            pagesCount > 1 ?
-                <div className={`threads posts-pagination ${sticky? 'sticky' : ''}`}>
+                pagesCount > 1 ?
+                    // <div className={`${sticky? 'sticky' : ''}`}>
                     <Pagination
                         pagesCount={pagesCount}
                         setPage={setPage}
                         currentPage={currentPage}
-                        styles={{top: '50%', transform: 'translateY(-50%) translateX(-50%)'}}
+                        className={`${sticky ? 'pagination-sticky' : ''}`}
                     />
-                </div> : null
-        }
-
-        <Modal
-            isActive={isModalActive}
-            setActive={setModalActive}
-            isPost
-            threadName={name}
-            threadId={id}
-            authorName={author.name}
-            reply={reply}
-            text={textValue}
-        />
-
-    </div>
+                    // </div>
+                    : null
+            }
+            <Modal
+                isActive={isModalActive}
+                setActive={setModalActive}
+                isPost
+                threadName={name}
+                threadId={id}
+                authorName={author.name}
+                reply={reply}
+                text={textValue}
+            />
+        </div>
+    )
 }
 
 const mapStateToProps = createStructuredSelector({

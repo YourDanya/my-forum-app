@@ -1,4 +1,8 @@
 .post
+  background-color: white
+  border-radius: 5px
+  z-index: 10
+  border: 1px solid #d4e4f7
   min-height: 0
   padding: 10px 15px 15px 15px
   width: 97.5%
@@ -58,3 +62,57 @@
       color: #be007f
       font-weight: 500
       cursor: pointer
+
+@media (max-width: 768px)
+  .post
+    padding: 8px 13px 13px
+    &-author
+      .name
+        font-size: 15px
+    &-content
+      padding: 13px 0
+      .text
+        margin: 8px 0 0
+        line-height: 20px
+      .block
+        .date
+        .number
+    &-footer
+      margin: 10px 0 0
+      .stats
+        .like
+          font-size: 18px
+          span
+            font-size: 13.5px
+      .reply
+        font-size: 15px
+
+@media (max-width: 576px)
+  .post
+    margin-bottom: 15px
+    padding: 6px 11px 11px
+    &-author
+      .name
+        margin-left: 10px
+        font-size: 14px
+        line-height: 14px
+    &-content
+      padding: 11px 0
+      .text
+        margin: 8px 0 0
+        font-size: 14.5px
+        line-height: 18px
+      .block
+        .date
+          font-size: 11px
+        .number
+          font-size: 11px
+    &-footer
+      margin: 10px 0 0
+      .stats
+        .like
+          font-size: 17px
+          span
+            font-size: 13px
+      .reply
+        font-size: 14px
